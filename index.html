@@ -177,33 +177,29 @@ footer{border-top:1px solid var(--line);text-align:center;padding:44px 24px;colo
   </div>
 </div>
 
-<section id="proof" style="padding-top:56px;padding-bottom:24px">
-  <div class="eyebrow">The proof</div>
-  <h2 class="sec serif">Same person. Different decisions.</h2>
-  <p class="sub">The founder ran this exact system — the plans below are the ones that did this. No filters, no course to buy at the end.</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)">
-    <figure style="margin:0;background:var(--bg);padding:0">
-      <img src="before.jpg" alt="Before" style="width:100%;display:block;filter:grayscale(1) contrast(1.05);aspect-ratio:4/5;object-fit:cover">
-      <figcaption style="padding:14px 18px;display:flex;justify-content:space-between;align-items:baseline"><span class="eyebrow" style="margin:0">Before</span><span class="small">EDIT ME — year</span></figcaption>
-    </figure>
-    <figure style="margin:0;background:var(--bg);padding:0">
-      <img src="after.jpg" alt="After" style="width:100%;display:block;aspect-ratio:4/5;object-fit:cover">
-      <figcaption style="padding:14px 18px;display:flex;justify-content:space-between;align-items:baseline"><span class="eyebrow" style="margin:0;color:var(--ink)">After</span><span class="small">EDIT ME — year</span></figcaption>
-    </figure>
-  </div>
-</section>
 
 <section id="account" style="padding-top:24px">
   <div class="eyebrow">Account</div>
   <h2 class="sec serif">Your profile</h2>
-  <p class="sub">Sign up to save progress, earn XP on the leaderboard of your own life, and unlock community chat.</p>
+  <p class="sub">Sign up to save your progress, claim a username, add friends, and unlock the chat.</p>
   <div class="grid2">
     <div class="card" id="authBox"><!-- js --></div>
     <div class="card">
       <h3>Today's push</h3>
       <p id="motivMsg" class="serif" style="font-size:1.2rem;line-height:1.45;margin:12px 0;color:var(--ink)"></p>
-      <div class="note"><b>The one rule that makes this place different:</b> nobody gets rated here — not by an algorithm, not by each other. Progress over perfection, always. Asking "am I ugly" gets you redirected to building a plan; hyping someone's Day 30 gets you XP.</div>
+      <div class="note"><b>The one rule:</b> nobody gets rated here. Not by an algorithm, not by each other. Asking "am I ugly" gets redirected to building a plan. Hyping someone's Day 30 gets you XP.</div>
     </div>
+  </div>
+  <div class="card hidden" id="friendsCard" style="margin-top:20px">
+    <h3>Friends</h3>
+    <p class="small" style="margin-top:4px">Add the people grinding with you. Their level shows next to their name.</p>
+    <div style="display:flex;gap:10px;max-width:440px;margin-top:10px">
+      <input id="frName" placeholder="username" maxlength="18">
+      <button class="btn" id="frAdd" style="margin-top:0;flex-shrink:0">Add friend</button>
+    </div>
+    <p class="small" id="frMsg" style="margin-top:8px"></p>
+    <div id="frPending" style="margin-top:12px"></div>
+    <div id="frList" style="margin-top:10px"></div>
   </div>
 </section>
 
@@ -419,13 +415,15 @@ footer{border-top:1px solid var(--line);text-align:center;padding:44px 24px;colo
 
 <footer>
   <div class="logo serif" style="margin-bottom:8px">UMBRA<b style="color:var(--accent)">.</b></div>
-  <p>umbramode.com · Free forever · No ratings, ever · Not medical advice — see a professional for diet, skin, or mental-health concerns.</p>
+  <p>Free forever · No ratings, ever · Not medical advice — see a professional for diet, skin, or mental-health concerns.</p>
+  <p style="margin-top:12px">Got an idea like this one? The founder built this entire site by talking to <a href="https://claude.ai" style="text-decoration:underline">Claude</a> — no code experience needed. Bring it yours.</p>
 </footer>
 
 <script type="module" id="app">
-/* ============ CONFIG — paste your free Supabase keys here (see SETUP_GUIDE.md) ============ */
+/* ============ CONFIG — paste your free keys here (see SETUP_GUIDE.md) ============ */
 const SUPABASE_URL = "https://jsrctuqwpvuahpeoqwdj.supabase.co";        // e.g. https://abcdxyz.supabase.co
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcmN0dXF3cHZ1YWhwZW9xd2RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM1MjM1NjksImV4cCI6MjA5OTA5OTU2OX0.juSwML0o5zJLHSnFvAQr-Uqd3p-gpk0jcUNfmKdNsqk";   // Settings → API → anon public key
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzcmN0dXF3cHZ1YWhwZW9xd2RqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM1MjM1NjksImV4cCI6MjA5OTA5OTU2OX0.juSwML0o5zJLHSnFvAQr-Uqd3p-gpk0jcUNfmKdNsqk";   // Supabase → Settings → API → anon public key
+const ONESIGNAL_APP_ID = "";    // OneSignal → Settings → Keys & IDs (for daily push notifications)
 
 /* ============ HELPERS ============ */
 const $ = id => document.getElementById(id);
@@ -887,12 +885,12 @@ async function initCloud(){
   sb.auth.onAuthStateChange(async (_e, session) => {
     me = session?.user || null;
     if (me) await loadProfile();
-    renderAuth(); renderChatGate();
+    renderAuth(); renderChatGate(); loadFriends();
   });
   const { data:{ session } } = await sb.auth.getSession();
   me = session?.user || null;
   if (me) await loadProfile();
-  renderAuth(); renderChatGate();
+  renderAuth(); renderChatGate(); loadFriends();
 }
 
 async function loadProfile(){
@@ -920,9 +918,19 @@ function renderAuth(){
     return;
   }
   if (me){
-    box.innerHTML = `<h3>Welcome back, ${myProfile?.username || "riser"} 👋</h3>
-      <p class="small" style="margin-top:8px">Signed in as ${me.email || "OAuth user"} · XP syncs across your devices.</p>
+    box.innerHTML = `<h3 class="serif">@${myProfile?.username || "…"}</h3>
+      <p class="small" style="margin-top:8px">Signed in${me.email ? " as "+me.email : ""} · XP and rank sync across your devices.</p>
+      <label>Username</label>
+      <div style="display:flex;gap:10px;max-width:380px">
+        <input id="unInput" value="${myProfile?.username || ""}" maxlength="18">
+        <button class="btn" id="unSave" style="margin-top:0;flex-shrink:0">Save</button>
+      </div>
+      <p class="small" id="unMsg" style="margin-top:6px"></p>
       <button class="btn sec" id="signOut">Sign out</button>`;
+    $("unSave").addEventListener("click", async () => {
+      const err = await claimUsername($("unInput").value);
+      $("unMsg").textContent = err || "Saved.";
+    });
     $("signOut").addEventListener("click", async () => { await sb.auth.signOut(); });
     return;
   }
@@ -950,6 +958,83 @@ function renderAuth(){
   $("oGoogle").addEventListener("click", () => sb.auth.signInWithOAuth({ provider:"google" }));
   $("oDiscord").addEventListener("click", () => sb.auth.signInWithOAuth({ provider:"discord" }));
 }
+
+/* ---- usernames ---- */
+async function claimUsername(raw){
+  const name = raw.trim().toLowerCase().replace(/[^a-z0-9_.]/g,"").slice(0,18);
+  if (name.length < 3) return "3–18 characters: letters, numbers, _ or .";
+  const { error } = await sb.from("profiles").update({ username:name }).eq("id", me.id);
+  if (error) return error.code === "23505" ? "That username is taken." : error.message;
+  myProfile = { ...myProfile, username:name };
+  renderAuth(); loadFriends();
+  return null;
+}
+
+/* ---- friends ---- */
+async function loadFriends(){
+  if (!sb || !me){ $("friendsCard").classList.add("hidden"); return; }
+  $("friendsCard").classList.remove("hidden");
+  const { data: fr } = await sb.from("friendships").select("*").or(`requester.eq.${me.id},addressee.eq.${me.id}`);
+  const ids = [...new Set((fr||[]).flatMap(f => [f.requester, f.addressee]).filter(id => id !== me.id))];
+  const profs = {};
+  if (ids.length){
+    const { data: ps } = await sb.from("profiles").select("id,username,level").in("id", ids);
+    (ps||[]).forEach(p => profs[p.id] = p);
+  }
+  const rowStyle = 'display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:.92rem';
+  const pending = (fr||[]).filter(f => f.status==="pending" && f.addressee===me.id);
+  const sent = (fr||[]).filter(f => f.status==="pending" && f.requester===me.id);
+  const friends = (fr||[]).filter(f => f.status==="accepted");
+  $("frPending").innerHTML = pending.length
+    ? `<b style="font-size:.82rem;letter-spacing:.08em;text-transform:uppercase">Requests</b>` + pending.map(f => {
+        const p = profs[f.requester];
+        return `<div style="${rowStyle}"><span>@${p?.username||"?"} <span class="small">Lv ${p?.level||1}</span></span>
+          <span><button class="btn sm" data-acc="${f.id}">Accept</button> <button class="btn sec sm" data-dec="${f.id}">Decline</button></span></div>`;
+      }).join("")
+    : "";
+  $("frList").innerHTML = (friends.length
+    ? `<b style="font-size:.82rem;letter-spacing:.08em;text-transform:uppercase">Your circle · ${friends.length}</b>` + friends.map(f => {
+        const p = profs[f.requester===me.id ? f.addressee : f.requester];
+        return `<div style="${rowStyle}"><span>@${p?.username||"?"}</span><span class="small">Lv ${p?.level||1}</span></div>`;
+      }).join("")
+    : `<p class="small">No friends yet. Add whoever's grinding with you.</p>`)
+    + (sent.length ? `<p class="small" style="margin-top:10px">Sent, waiting: ${sent.map(f=>"@"+(profs[f.addressee]?.username||"?")).join(", ")}</p>` : "");
+  $("frPending").querySelectorAll("[data-acc]").forEach(b => b.addEventListener("click", async () => {
+    await sb.from("friendships").update({ status:"accepted" }).eq("id", b.dataset.acc);
+    loadFriends();
+  }));
+  $("frPending").querySelectorAll("[data-dec]").forEach(b => b.addEventListener("click", async () => {
+    await sb.from("friendships").delete().eq("id", b.dataset.dec);
+    loadFriends();
+  }));
+}
+$("frAdd").addEventListener("click", async () => {
+  if (!sb || !me) return;
+  const name = $("frName").value.trim().toLowerCase();
+  if (!name) return;
+  const { data: p } = await sb.from("profiles").select("id,username").eq("username", name).maybeSingle();
+  if (!p){ $("frMsg").textContent = "No one with that username."; return; }
+  if (p.id === me.id){ $("frMsg").textContent = "That's you."; return; }
+  const { error } = await sb.from("friendships").insert({ requester:me.id, addressee:p.id });
+  $("frMsg").textContent = error ? (error.code==="23505" ? "Request already sent." : error.message) : `Request sent to @${p.username}.`;
+  $("frName").value = "";
+  loadFriends();
+});
+
+/* ---- daily push notifications (OneSignal, free) ---- */
+function initPush(){
+  if (!ONESIGNAL_APP_ID) return;
+  const s = document.createElement("script");
+  s.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
+  s.defer = true;
+  document.head.appendChild(s);
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  window.OneSignalDeferred.push(async OneSignal => {
+    await OneSignal.init({ appId: ONESIGNAL_APP_ID });
+    OneSignal.Slidedown.promptPush();
+  });
+}
+initPush();
 
 /* ---- chat ---- */
 let chatSub = null, lastSent = 0;
