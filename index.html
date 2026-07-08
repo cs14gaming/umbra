@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UMBRA — Level Up In The Dark. No Judging.</title>
+<meta name="description" content="UMBRA: the judgment-free glow-up app. Detailed diet plans, real training programs, lift ranks, XP levels, and a community that hypes you instead of rating you. Free forever.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Archivo+Black&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080b; --bg-soft:#0d1016; --card:#10131b; --ink:#f0f2f7; --ink-2:#c6ccd8; --muted:#7e8798;
+  --line:#1d2330; --line-2:#2b3345; --accent:#3ee6a0; --accent-soft:rgba(62,230,160,.10);
+  --amber:#e6c26a; --amber-soft:#211b0c; --blue:#6ea8ff; --blue-soft:#0e1728;
+  --xp:#a78bfa; --xp-soft:#171029;
+  --r:14px; --shadow:0 0 0 1px rgba(255,255,255,.02),0 14px 40px -18px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,"Segoe UI",sans-serif;line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 50% -20%, rgba(62,230,160,.06), transparent 55%)}
+h1,h2,h3,h4{font-weight:700;line-height:1.15;letter-spacing:-.01em}
+.serif{font-family:"Archivo Black",Inter,sans-serif;text-transform:uppercase;letter-spacing:.015em;font-weight:400}
+.eyebrow{font-family:"JetBrains Mono",monospace}
+a{color:var(--accent);text-decoration:none}
+section{max-width:1060px;margin:0 auto;padding:64px 24px}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+h2.sec{font-size:2rem;margin-bottom:8px}
+p.sub{color:var(--muted);margin-bottom:28px;max-width:640px}
+.small{font-size:.85rem;color:var(--muted)}
+.hidden{display:none}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(7,8,11,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1060px;margin:0 auto;display:flex;align-items:center;gap:22px;padding:15px 24px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+.logo b{color:var(--accent)}
+nav a.link{color:var(--muted);font-size:.9rem;font-weight:500}
+nav a.link:hover{color:var(--ink)}
+#navLevel{margin-left:auto;background:var(--xp-soft);color:var(--xp);font-size:.82rem;font-weight:700;padding:7px 14px;border-radius:999px}
+
+.hero{max-width:1060px;margin:0 auto;padding:88px 24px 64px;text-align:center}
+.hero h1{font-size:clamp(2.3rem,5.4vw,3.8rem);font-weight:700;max-width:840px;margin:0 auto}
+.hero h1 .u{box-shadow:inset 0 -0.35em 0 var(--accent-soft)}
+.hero p{max-width:640px;margin:22px auto 0;color:var(--muted);font-size:1.1rem}
+.trust{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:32px;color:var(--ink-2);font-size:.88rem;font-weight:500}
+.trust div::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
+.cta{display:inline-block;margin-top:36px;background:var(--accent);color:#07080b;font-weight:700;padding:15px 36px;border-radius:999px;font-size:1.02rem;box-shadow:0 0 30px -6px rgba(62,230,160,.5)}
+.cta:hover{background:#5df0b4}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)}
+.card.flat{box-shadow:none;background:var(--bg-soft)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+
+label{display:block;font-size:.82rem;color:var(--ink-2);margin:16px 0 6px;font-weight:600}
+input,select,textarea{width:100%;background:var(--card);border:1px solid var(--line-2);color:var(--ink);border-radius:10px;padding:11px 13px;font-size:.98rem;font-family:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
+.btn{display:inline-block;background:var(--accent);color:#07080b;font-weight:700;border:none;border-radius:10px;padding:13px 28px;font-size:.98rem;cursor:pointer;margin-top:18px;font-family:inherit}
+.btn:hover{background:#5df0b4}
+.btn.sec{background:var(--card);color:var(--ink);border:1px solid var(--line-2)}
+.btn.sec:hover{background:var(--bg-soft)}
+.btn.sm{padding:8px 16px;font-size:.85rem;margin-top:0}
+.pillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.pill{border:1px solid var(--line-2);background:var(--card);color:var(--ink-2);border-radius:999px;padding:8px 16px;cursor:pointer;font-size:.88rem;user-select:none;font-weight:500}
+.pill.on{background:var(--accent);color:#07080b;border-color:var(--accent);font-weight:700}
+
+/* XP / levels */
+.xpbar{height:14px;border-radius:99px;background:var(--bg-soft);border:1px solid var(--line);overflow:hidden}
+.xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--xp),#a78bfa);transition:width .6s ease}
+.lvl-big{font-family:Fraunces,serif;font-size:3.2rem;font-weight:700;color:var(--xp);line-height:1}
+.ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}
+@media(max-width:820px){.ladder{grid-template-columns:repeat(2,1fr)}}
+.rung{border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center;font-size:.82rem;color:var(--muted)}
+.rung b{display:block;color:var(--ink);font-size:.9rem}
+.rung.now{border-color:var(--xp);background:var(--xp-soft)}
+.rung.done{opacity:.55}
+#lvlToast{position:fixed;left:50%;top:18px;transform:translateX(-50%) scale(.9);background:var(--xp);color:#fff;font-weight:700;padding:14px 28px;border-radius:999px;box-shadow:0 10px 30px rgba(124,58,237,.4);opacity:0;pointer-events:none;transition:.35s;z-index:99}
+#lvlToast.show{opacity:1;transform:translateX(-50%) scale(1)}
+
+/* Plan */
+.plan-block{margin-top:20px}
+.plan-block h3{font-size:1rem;margin-bottom:10px}
+.plan-block h3 span{color:var(--accent)}
+.plan-block ul{list-style:none}
+.plan-block li{padding:10px 14px;background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;font-size:.92rem;color:var(--ink-2)}
+.mealday{border:1px solid var(--line);border-radius:10px;margin-bottom:10px;overflow:hidden}
+.mealday summary{padding:14px 18px;cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;font-size:.93rem}
+.mealday summary::-webkit-details-marker{display:none}
+.mealday .m-body{padding:0 18px 14px}
+.meal{padding:10px 0;border-top:1px solid var(--line);font-size:.9rem}
+.meal b{display:block}
+.meal .small{margin-top:2px}
+.macros{font-size:.78rem;color:var(--accent);font-weight:600}
+
+/* Tracker */
+.streak{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.streak .card{padding:18px 26px;text-align:center;flex:1;min-width:120px}
+.streak .num{font-size:2rem;font-weight:800;color:var(--accent);font-family:Fraunces,serif}
+.day-task{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin-bottom:8px;cursor:pointer;user-select:none}
+.day-task:hover{border-color:var(--line-2)}
+.day-task.done{opacity:.5}
+.day-task.done .t{text-decoration:line-through}
+.day-task .xp{margin-left:auto;font-size:.75rem;font-weight:700;color:var(--xp)}
+.check{width:21px;height:21px;border-radius:6px;border:1.5px solid var(--line-2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:#07080b;font-weight:800}
+.day-task.done .check{background:var(--accent);border-color:var(--accent)}
+
+/* Chat */
+.chat-wrap{display:grid;grid-template-columns:200px 1fr;gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;height:520px;background:var(--card);box-shadow:var(--shadow)}
+@media(max-width:720px){.chat-wrap{grid-template-columns:1fr;height:auto}}
+.chan-list{background:var(--bg-soft);border-right:1px solid var(--line);padding:14px 0}
+.chan{padding:9px 18px;cursor:pointer;font-size:.9rem;color:var(--muted);font-weight:500}
+.chan:hover{color:var(--ink)}
+.chan.on{color:var(--accent);font-weight:700;background:var(--accent-soft)}
+.chat-main{display:flex;flex-direction:column;min-height:380px}
+#msgs{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px}
+.msg{font-size:.92rem}
+.msg .who{font-weight:700;margin-right:6px}
+.msg .lv{font-size:.68rem;font-weight:700;color:var(--xp);background:var(--xp-soft);border-radius:99px;padding:2px 8px;margin-right:6px;vertical-align:1px}
+.msg .when{font-size:.72rem;color:var(--muted);margin-left:6px}
+.msg .rep{font-size:.7rem;color:var(--muted);cursor:pointer;margin-left:8px;opacity:0;transition:.15s}
+.msg:hover .rep{opacity:1}
+.chat-input{display:flex;gap:10px;padding:12px;border-top:1px solid var(--line)}
+.chat-input input{flex:1}
+.rules{background:var(--amber-soft);border:1px solid var(--line-2);border-radius:10px;padding:12px 16px;font-size:.85rem;color:var(--amber);margin-bottom:16px}
+
+/* Guides */
+details.g{background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px;overflow:hidden}
+details.g summary{padding:19px 24px;cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:.98rem}
+details.g summary::-webkit-details-marker{display:none}
+details.g summary::after{content:"+";color:var(--muted);font-size:1.25rem;font-weight:400}
+details.g[open] summary::after{content:"–"}
+.g-body{padding:0 24px 22px;color:var(--muted);font-size:.93rem}
+.g-body p{margin-bottom:10px}
+.g-body strong{color:var(--ink-2)}
+
+.note{background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:.88rem;color:var(--muted);margin-top:16px}
+.note b{color:var(--ink-2)}
+.oauth{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.oauth button{flex:1;min-width:130px;padding:11px;border:1px solid var(--line-2);border-radius:10px;background:var(--card);font-weight:600;font-size:.9rem;cursor:pointer;font-family:inherit}
+.oauth button:hover{background:var(--bg-soft)}
+footer{border-top:1px solid var(--line);text-align:center;padding:44px 24px;color:var(--muted);font-size:.85rem;background:var(--bg-soft)}
+</style>
+</head>
+<body>
+
+<div id="lvlToast"></div>
+
+<nav><div class="nav-inner">
+  <div class="logo serif" style="font-size:1.05rem">UMBRA<b style="color:var(--accent)">.</b></div>
+  <a class="link" href="#account">Account</a>
+  <a class="link" href="#assess">My Plan</a>
+  <a class="link" href="#tracker">Tracker</a>
+  <a class="link" href="#ranks">Ranks</a>
+  <a class="link" href="#levels">Levels</a>
+  <a class="link" href="#chat">Community</a>
+  <a class="link" href="#guides">Guides</a>
+  <span id="navLevel">Lv 1 · Rookie</span>
+</div></nav>
+
+<div class="hero" style="position:relative;overflow:hidden">
+  <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" style="position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#3a4358" stroke-width="1" fill="none">
+      <!-- perspective floor grid -->
+      <g>
+        <line x1="600" y1="330" x2="-500" y2="600"/><line x1="600" y1="330" x2="-100" y2="600"/><line x1="600" y1="330" x2="180" y2="600"/><line x1="600" y1="330" x2="380" y2="600"/><line x1="600" y1="330" x2="520" y2="600"/><line x1="600" y1="330" x2="600" y2="600"/><line x1="600" y1="330" x2="680" y2="600"/><line x1="600" y1="330" x2="820" y2="600"/><line x1="600" y1="330" x2="1020" y2="600"/><line x1="600" y1="330" x2="1300" y2="600"/><line x1="600" y1="330" x2="1700" y2="600"/>
+        <line x1="0" y1="360" x2="1200" y2="360"/><line x1="0" y1="385" x2="1200" y2="385"/><line x1="0" y1="415" x2="1200" y2="415"/><line x1="0" y1="455" x2="1200" y2="455"/><line x1="0" y1="510" x2="1200" y2="510"/><line x1="0" y1="580" x2="1200" y2="580"/>
+      </g>
+      <!-- wireframe peaks -->
+      <path d="M-20 360 L80 260 L140 330 L200 280 L280 360" stroke="#4a5570"/>
+      <path d="M920 360 L1010 250 L1070 320 L1140 270 L1230 360" stroke="#4a5570"/>
+      <!-- floating cubes -->
+      <g stroke="#5c6885">
+        <path d="M180 90 l40 -14 l34 18 l-40 14 z M180 90 l0 34 l34 18 l0 -34 M254 94 l0 34 l-40 14"/>
+        <path d="M960 60 l30 -10 l26 13 l-30 10 z M960 60 l0 26 l26 13 l0 -26 M1016 63 l0 26 l-30 10"/>
+        <path d="M760 150 l20 -7 l18 9 l-20 7 z M760 150 l0 18 l18 9 l0 -18 M798 152 l0 18 l-20 7"/>
+      </g>
+      <!-- stars -->
+      <g fill="#6b7591" stroke="none">
+        <circle cx="90" cy="60" r="2"/><circle cx="320" cy="140" r="1.5"/><circle cx="540" cy="70" r="2"/><circle cx="700" cy="40" r="1.5"/><circle cx="880" cy="170" r="2"/><circle cx="1120" cy="90" r="1.5"/><circle cx="440" cy="200" r="1.5"/><circle cx="1050" cy="200" r="1.5"/>
+      </g>
+    </g>
+  </svg>
+  <div style="position:relative">
+    <div class="eyebrow">Free forever · No ratings · No judging</div>
+    <h1 class="serif">Enter the dark.<br><span style="color:var(--accent)">Leave different.</span></h1>
+    <p>The grind nobody sees is where the glow-up happens. Detailed diet plans, real training programs, lift ranks, XP levels — and a community that hypes your progress instead of rating your looks.</p>
+    <a class="cta" href="#assess">Start the grind — free</a>
+    <div class="trust">
+      <div>No paywalls, ever</div>
+      <div>No looks ratings, ever</div>
+      <div>XP · ranks · streaks</div>
+      <div>Built by someone who did it</div>
+    </div>
+  </div>
+</div>
+
+<section id="account" style="padding-top:24px">
+  <div class="eyebrow">Account</div>
+  <h2 class="sec serif">Your profile</h2>
+  <p class="sub">Sign up to save progress, earn XP on the leaderboard of your own life, and unlock community chat.</p>
+  <div class="grid2">
+    <div class="card" id="authBox"><!-- js --></div>
+    <div class="card">
+      <h3>Today's push</h3>
+      <p id="motivMsg" class="serif" style="font-size:1.2rem;line-height:1.45;margin:12px 0;color:var(--ink)"></p>
+      <div class="note"><b>The one rule that makes this place different:</b> nobody gets rated here — not by an algorithm, not by each other. Progress over perfection, always. Asking "am I ugly" gets you redirected to building a plan; hyping someone's Day 30 gets you XP.</div>
+    </div>
+  </div>
+</section>
+
+<section id="assess">
+  <div class="eyebrow">Step 1</div>
+  <h2 class="sec serif">Build your plan</h2>
+  <p class="sub">Two minutes of honest answers → detailed diet with real meals and portions, training program, skincare routine, and daily habits that earn XP.</p>
+  <div class="card">
+    <div class="grid3">
+      <div>
+        <h4 style="font-size:.9rem;color:var(--accent)">Basics</h4>
+        <label>Age</label><input type="number" id="qAge" min="13" max="90" placeholder="17">
+        <label>Sex</label><select id="qSex"><option value="m">Male</option><option value="f">Female</option></select>
+        <label>Height (cm)</label><input type="number" id="qHeight" placeholder="178">
+        <label>Weight (kg)</label><input type="number" id="qWeight" placeholder="74">
+        <label>Training experience</label>
+        <select id="qTrain"><option value="none">Don't train yet</option><option value="beginner">Beginner (0–1 yr)</option><option value="intermediate">Intermediate (1–3 yrs)</option><option value="advanced">Advanced (3+ yrs)</option></select>
+        <label>Main goal</label>
+        <select id="qGoal"><option value="lean">Get leaner</option><option value="muscle">Build muscle</option><option value="recomp">Both (recomp)</option><option value="health">Feel & look healthier</option></select>
+        <label>Muscle groups to prioritize</label>
+        <div class="pillrow" id="qMuscles">
+          <div class="pill" data-v="chest">Chest</div><div class="pill" data-v="back">Back</div><div class="pill" data-v="shoulders">Shoulders</div><div class="pill" data-v="arms">Arms</div><div class="pill" data-v="legs">Legs</div><div class="pill" data-v="glutes">Glutes</div><div class="pill" data-v="abs">Abs</div><div class="pill" data-v="posture">Posture</div>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:.9rem;color:var(--accent)">Food (for your diet plan)</h4>
+        <label>Eating style</label>
+        <select id="qDiet"><option value="omni">Everything (omnivore)</option><option value="veg">Vegetarian</option><option value="vegan">Vegan</option></select>
+        <label>Meals per day</label>
+        <select id="qMeals"><option value="3">3 meals + snack</option><option value="4">4 smaller meals</option></select>
+        <label>Avoid (pick any)</label>
+        <div class="pillrow" id="qAvoid">
+          <div class="pill" data-v="dairy">Dairy</div><div class="pill" data-v="nuts">Nuts</div><div class="pill" data-v="eggs">Eggs</div><div class="pill" data-v="fish">Fish</div>
+        </div>
+        <label>Food budget</label>
+        <select id="qBudget"><option value="tight">Tight — cheap staples</option><option value="normal">Normal</option></select>
+        <label>Cooking skill</label>
+        <select id="qCook"><option value="basic">Basic (microwave/pan)</option><option value="ok">Can follow recipes</option></select>
+      </div>
+      <div>
+        <h4 style="font-size:.9rem;color:var(--accent)">Lifestyle & skin</h4>
+        <label>Sleep per night</label>
+        <select id="qSleep"><option value="lt6">Under 6 h</option><option value="6to7">6–7 h</option><option value="7to8">7–8 h</option><option value="8plus">8+ h</option></select>
+        <label>Daily steps (guess)</label>
+        <select id="qSteps"><option value="low">Under 4k</option><option value="mid">4–8k</option><option value="high">8k+</option></select>
+        <label>Current skincare</label>
+        <select id="qSkincare"><option value="none">Nothing / just water</option><option value="basic">Cleanser sometimes</option><option value="routine">Cleanser + moisturizer</option><option value="full">Full routine incl. SPF</option></select>
+        <label>Skin concerns</label>
+        <div class="pillrow" id="qSkinIssues">
+          <div class="pill" data-v="acne">Acne</div><div class="pill" data-v="oily">Oily</div><div class="pill" data-v="dry">Dry</div><div class="pill" data-v="dark">Dark circles</div><div class="pill" data-v="none">None</div>
+        </div>
+        <label>Biggest thing you're working on</label>
+        <select id="qBlocker"><option value="body">My body</option><option value="skin">My skin</option><option value="style">My style</option><option value="social">Social confidence</option><option value="energy">Low energy</option></select>
+      </div>
+    </div>
+    <button class="btn" id="genPlan">Generate my full plan (+50 XP)</button>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="eyebrow">Step 2</div>
+  <h2 class="sec serif">Your plan</h2>
+  <p class="sub">Regenerate any time — tracker and XP update automatically.</p>
+  <div id="planEmpty" class="card flat"><p class="small">Fill in Step 1 and hit generate.</p></div>
+  <div id="planOut" class="hidden">
+    <div class="card" style="margin-bottom:20px">
+      <h3 style="margin-bottom:6px">Your numbers</h3>
+      <div id="bodyStats"></div>
+    </div>
+    <div class="card" style="margin-bottom:20px">
+      <h3 style="margin-bottom:4px">7-day diet plan</h3>
+      <p class="small" id="dietSummary" style="margin-bottom:14px"></p>
+      <div id="dietPlan"></div>
+      <div class="note" id="groceryList"></div>
+    </div>
+    <div class="grid2">
+      <div class="card"><div id="planLeft"></div></div>
+      <div class="card"><div id="planRight"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="tracker">
+  <div class="eyebrow">Step 3</div>
+  <h2 class="sec serif">Daily tracker</h2>
+  <p class="sub">Every habit you check earns XP. Finish the whole day for a bonus. Streaks multiply the dopamine.</p>
+  <div class="streak">
+    <div class="card"><div class="num" id="streakNow">0</div><div class="small">day streak</div></div>
+    <div class="card"><div class="num" id="doneToday">0</div><div class="small">done today</div></div>
+    <div class="card"><div class="num" id="xpToday">0</div><div class="small">XP today</div></div>
+  </div>
+  <div class="card"><div id="taskList"><p class="small">Generate a plan first — your daily quests appear here.</p></div></div>
+  <div class="grid2" style="margin-top:20px">
+    <div class="card">
+      <h3>Weekly check-in <span class="small" style="font-weight:400">(+30 XP)</span></h3>
+      <label>Weight (kg)</label><input id="ciWeight" type="number" step="0.1" placeholder="74.2">
+      <label>Waist (cm) — optional</label><input id="ciWaist" type="number" step="0.5" placeholder="80">
+      <button class="btn" id="ciLog">Log check-in</button>
+      <div id="ciList" style="margin-top:16px"></div>
+    </div>
+    <div class="card">
+      <h3>Progress chart</h3>
+      <canvas id="ciChart" width="640" height="280" style="width:100%;margin-top:10px"></canvas>
+      <p class="small" style="margin-top:8px">Weight (green), waist (blue). Log weekly — daily scale noise isn't information.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ranks">
+  <div class="eyebrow">Strength</div>
+  <h2 class="sec serif">Lift ranks</h2>
+  <p class="sub">Ranked like a competitive game: log your best set on the big four and get a rank per lift from your estimated 1RM relative to bodyweight — Wood all the way to Olympian, with LP progress inside every rank. Rank up = +40 XP.</p>
+  <div class="card">
+    <div class="grid2">
+      <div>
+        <label style="margin-top:0">Bodyweight (kg)</label><input id="rkBW" type="number" step="0.1" placeholder="74">
+        <label>Sex (for strength standards)</label>
+        <select id="rkSex"><option value="m">Male</option><option value="f">Female</option></select>
+        <div class="grid2" style="gap:12px">
+          <div><label>Bench — weight kg × reps</label>
+            <div style="display:flex;gap:8px"><input id="rkBenchW" type="number" placeholder="60"><input id="rkBenchR" type="number" placeholder="5" style="max-width:80px"></div></div>
+          <div><label>Squat — weight kg × reps</label>
+            <div style="display:flex;gap:8px"><input id="rkSquatW" type="number" placeholder="80"><input id="rkSquatR" type="number" placeholder="5" style="max-width:80px"></div></div>
+          <div><label>Deadlift — weight kg × reps</label>
+            <div style="display:flex;gap:8px"><input id="rkDeadW" type="number" placeholder="100"><input id="rkDeadR" type="number" placeholder="5" style="max-width:80px"></div></div>
+          <div><label>Overhead press — weight kg × reps</label>
+            <div style="display:flex;gap:8px"><input id="rkOhpW" type="number" placeholder="40"><input id="rkOhpR" type="number" placeholder="5" style="max-width:80px"></div></div>
+        </div>
+        <button class="btn" id="rkRank">Rank my lifts</button>
+        <p class="small" style="margin-top:10px">Log any lifts you have — you don't need all four. Estimated 1RM uses the Epley formula (reps ≤ 10 is most accurate). Always rank with honest, full-range reps.</p>
+      </div>
+      <div id="rkOut"><p class="small" style="padding-top:6px">Your rank cards appear here. Your overall rank is the average of your lift scores — one strong lift won't carry you to Olympian, balance will.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="levels">
+  <div class="eyebrow">Progression</div>
+  <h2 class="sec serif">Your level</h2>
+  <p class="sub">XP comes from doing the work, not from how you look. That's the whole point.</p>
+  <div class="card">
+    <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">
+      <div style="text-align:center;min-width:140px">
+        <div class="lvl-big" id="lvlNum">1</div>
+        <div style="font-weight:700" id="lvlName">Rookie</div>
+      </div>
+      <div style="flex:1;min-width:260px">
+        <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:6px">
+          <b id="xpNow">0 XP</b><span class="small" id="xpNext"></span>
+        </div>
+        <div class="xpbar"><i id="xpBarFill" style="width:0%"></i></div>
+        <p class="small" style="margin-top:10px">Earn XP: daily habit +10 · full day bonus +25 · weekly check-in +30 · generating your plan +50 · 7-day streak +100</p>
+      </div>
+    </div>
+    <div class="ladder" id="ladder"></div>
+  </div>
+</section>
+
+<section id="chat">
+  <div class="eyebrow">Community</div>
+  <h2 class="sec serif">The chat</h2>
+  <p class="sub">Channels like Discord. Wins, questions, accountability. Your level shows next to your name — flex the work, not the face.</p>
+  <div class="rules"><b>House rules:</b> No rating anyone's looks (including your own — we redirect "am I ugly" to "here's my plan"). No blackpill talk. Hype people's progress. Report anything gross — this is the corner of the internet that doesn't make people feel worse.</div>
+  <div id="chatGate" class="card flat"><p class="small">Chat unlocks when you're signed in. <a href="#account">Create your free account ↑</a></p></div>
+  <div class="chat-wrap hidden" id="chatUI">
+    <div class="chan-list" id="chanList"></div>
+    <div class="chat-main">
+      <div id="msgs"></div>
+      <div class="chat-input">
+        <input id="msgInput" maxlength="500" placeholder="Message… (be the hype man you needed)">
+        <button class="btn sm" id="msgSend">Send</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="guides">
+  <div class="eyebrow">Library</div>
+  <h2 class="sec serif">Guides</h2>
+  <p class="sub">The fundamentals, minus bro-science and fear-mongering.</p>
+
+  <details class="g"><summary>Eating 101 — why the diet plan works</summary><div class="g-body">
+    <p><strong>Calories decide weight; protein decides what that weight is made of.</strong> Your plan sets both from your stats (Mifflin-St Jeor + activity). A modest deficit (~400 kcal) loses fat without wrecking energy; a small surplus (~250) builds muscle without excess fat.</p>
+    <p><strong>Protein target:</strong> ~1.8 g per kg bodyweight, split across meals. It keeps you full, protects muscle in a cut, and builds it in a bulk.</p>
+    <p>Cheap protein that carries every budget plan: eggs, canned tuna, chicken thighs, Greek yogurt, milk, lentils, beans, frozen mince, whey (cheapest per gram of protein there is).</p>
+    <p>You don't need to be perfect. Hitting calories ±10% and protein ±20 g daily beats a "perfect" plan you quit in week 2.</p>
+  </div></details>
+
+  <details class="g"><summary>Skincare 101 — the only routine most people need</summary><div class="g-body">
+    <p><strong>Morning:</strong> gentle cleanser → moisturizer → SPF 30+. Daily SPF is the single highest-leverage skincare habit that exists.</p>
+    <p><strong>Evening:</strong> cleanser → moisturizer. For acne, adapalene 0.1% three nights a week building to nightly — judge at week 8–12, not week 2. Persistent acne deserves a doctor; prescriptions work.</p>
+    <p>Three products used daily beat fifteen used randomly.</p>
+  </div></details>
+
+  <details class="g"><summary>Training — the honest beginner blueprint</summary><div class="g-body">
+    <p>Three full-body sessions a week transforms a beginner inside a year: squat pattern, hinge, push, pull, carry. 2–3 sets of 6–12 reps, add a little weight most weeks. That progressive overload is the entire secret — everything else is decoration.</p>
+    <p>Can't access a gym? Push-up progressions, backpack rows, split squats, and a doorframe pull-up bar cover 80% of it for the price of a pizza.</p>
+  </div></details>
+
+  <details class="g"><summary>Sleep & water — the real cheat codes</summary><div class="g-body">
+    <p>7–9 hours of sleep improves skin repair, training recovery, mood, and how you look and feel every single morning. 2 L+ of water, less late-night salt and alcohol = sharper face by breakfast. These are free and they compound.</p>
+  </div></details>
+
+  <details class="g"><summary>Style starter pack</summary><div class="g-body">
+    <p><strong>Fit beats brand.</strong> Palette: navy, grey, white, black, olive. Foundations: dark straight jeans, plain tees that fit the shoulders, one overshirt, clean white sneakers. A tailor's hem is the best money in fashion.</p>
+  </div></details>
+
+  <details class="g"><summary>Mindset — why there are no ratings here</summary><div class="g-body">
+    <p>Rating apps and blackpill forums profit from making you feel stuck: hopeless users keep scrolling. The evidence runs the other way — grooming, fitness, skin, style, posture, and confidence dominate real-world first impressions, and every one of them is trainable. So this app measures <strong>actions</strong>, and only actions.</p>
+    <p>Compare yourself to yesterday's you. Monthly progress photos, not hourly mirror checks. And if appearance thoughts are eating your day or causing real distress, talk to someone — a doctor or therapist, not a rating algorithm. That's not weakness; it's maintenance, and it's what someone who takes their glow-up seriously would do.</p>
+  </div></details>
+</section>
+
+<footer>
+  <div class="logo serif" style="margin-bottom:8px">UMBRA<b style="color:var(--accent)">.</b></div>
+  <p>umbramode.com · Free forever · No ratings, ever · Not medical advice — see a professional for diet, skin, or mental-health concerns.</p>
+</footer>
+
+<script type="module" id="app">
+/* ============ CONFIG — paste your free Supabase keys here (see SETUP_GUIDE.md) ============ */
+const SUPABASE_URL = "";        // e.g. https://abcdxyz.supabase.co
+const SUPABASE_ANON_KEY = "";   // Settings → API → anon public key
+
+/* ============ HELPERS ============ */
+const $ = id => document.getElementById(id);
+const clamp = (v,a,b) => Math.min(b, Math.max(a, v));
+const todayKey = () => new Date().toISOString().slice(0,10);
+const f1 = x => (+x).toFixed(1);
+const LS = { plan:"rm_plan", checks:"rm_checks", ci:"rm_checkins", xp:"rm_xp", prof:"rm_local_profile" };
+
+document.querySelectorAll(".pillrow").forEach(rowEl => {
+  rowEl.addEventListener("click", e => {
+    const pill = e.target.closest(".pill"); if (!pill) return;
+    if (pill.dataset.v === "none"){ rowEl.querySelectorAll(".pill").forEach(p=>p.classList.remove("on")); pill.classList.toggle("on"); }
+    else { rowEl.querySelector('[data-v="none"]')?.classList.remove("on"); pill.classList.toggle("on"); }
+  });
+});
+const picked = id => [...document.querySelectorAll(`#${id} .pill.on`)].map(p => p.dataset.v);
+
+/* ============ XP & LEVELS ============ */
+const LEVELS = [
+  { xp:0,    name:"Rookie" },     { xp:100,  name:"Grinder" },
+  { xp:250,  name:"Consistent" }, { xp:500,  name:"Locked In" },
+  { xp:900,  name:"Momentum" },   { xp:1400, name:"Disciplined" },
+  { xp:2000, name:"Relentless" }, { xp:2800, name:"Elite" },
+  { xp:3800, name:"Apex" },       { xp:5000, name:"Ascended" }
+];
+const getXP = () => +localStorage.getItem(LS.xp) || 0;
+function levelFor(xp){
+  let i = 0;
+  while (i+1 < LEVELS.length && xp >= LEVELS[i+1].xp) i++;
+  return { n:i+1, name:LEVELS[i].name, cur:LEVELS[i].xp, next:LEVELS[i+1]?.xp ?? null };
+}
+function addXP(amount, why){
+  const before = levelFor(getXP());
+  const xp = getXP() + amount;
+  localStorage.setItem(LS.xp, xp);
+  const after = levelFor(xp);
+  toast(`+${amount} XP — ${why}` + (after.n>before.n ? ` · LEVEL UP! Lv ${after.n} ${after.name} 🎉` : ""));
+  renderXP();
+  cloudSyncXP(xp, after.n);   // no-op unless signed in
+}
+let toastTimer = null;
+function toast(txt){
+  const t = $("lvlToast");
+  t.textContent = txt; t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+}
+function renderXP(){
+  const xp = getXP(), lv = levelFor(xp);
+  $("navLevel").textContent = `Lv ${lv.n} · ${lv.name}`;
+  $("lvlNum").textContent = lv.n;
+  $("lvlName").textContent = lv.name;
+  $("xpNow").textContent = xp + " XP";
+  $("xpNext").textContent = lv.next ? `${lv.next - xp} XP to Lv ${lv.n+1}` : "Max level — you're him";
+  $("xpBarFill").style.width = lv.next ? ((xp-lv.cur)/(lv.next-lv.cur)*100)+"%" : "100%";
+  $("ladder").innerHTML = LEVELS.map((L,i) =>
+    `<div class="rung ${i+1===lv.n?"now":i+1<lv.n?"done":""}"><b>Lv ${i+1} · ${L.name}</b>${L.xp} XP</div>`).join("");
+}
+
+/* ============ DIET ENGINE ============ */
+/* Each food: kcal & protein per base portion; flags for filtering; portion text uses {x} multiplier */
+const FOODS = {
+  breakfast: [
+    { n:"Oats + milk + banana + whey", k:520, p:38, per:"80 g oats · 250 ml milk · 1 banana · 1 scoop whey", diet:["omni","veg"], avoid:["dairy"], cheap:true },
+    { n:"Eggs on toast + fruit", k:450, p:28, per:"3 eggs · 2 slices wholemeal · 1 apple", diet:["omni","veg"], avoid:["eggs"], cheap:true },
+    { n:"Greek yogurt bowl + honey + granola", k:430, p:32, per:"300 g Greek yogurt · 40 g granola · honey", diet:["omni","veg"], avoid:["dairy"], cheap:true },
+    { n:"Tofu scramble + toast", k:420, p:28, per:"200 g firm tofu · 2 slices toast · veg", diet:["omni","veg","vegan"], avoid:[], cheap:true },
+    { n:"Peanut butter oats + soy milk", k:540, p:26, per:"80 g oats · 250 ml soy milk · 30 g peanut butter", diet:["omni","veg","vegan"], avoid:["nuts"], cheap:true }
+  ],
+  lunch: [
+    { n:"Chicken rice bowl", k:650, p:45, per:"150 g chicken thigh · 100 g rice (dry) · veg + sauce", diet:["omni"], avoid:[], cheap:true },
+    { n:"Tuna pasta", k:600, p:40, per:"1 can tuna · 100 g pasta (dry) · tomato sauce", diet:["omni"], avoid:["fish"], cheap:true },
+    { n:"Lentil curry + rice", k:580, p:26, per:"200 g cooked lentils · 100 g rice · curry sauce", diet:["omni","veg","vegan"], avoid:[], cheap:true },
+    { n:"Turkey wrap ×2 + fruit", k:560, p:38, per:"2 wraps · 120 g turkey · salad · 1 orange", diet:["omni"], avoid:[], cheap:false },
+    { n:"Chickpea & feta salad + bread", k:520, p:24, per:"1 can chickpeas · 60 g feta · olive oil · bread", diet:["omni","veg"], avoid:["dairy"], cheap:true },
+    { n:"Tofu stir-fry + noodles", k:590, p:30, per:"200 g tofu · noodles · frozen stir-fry veg", diet:["omni","veg","vegan"], avoid:[], cheap:true }
+  ],
+  dinner: [
+    { n:"Beef mince + potatoes + veg", k:680, p:42, per:"150 g 5% mince · 300 g potatoes · frozen veg", diet:["omni"], avoid:[], cheap:true },
+    { n:"Salmon + rice + broccoli", k:640, p:40, per:"150 g salmon · 100 g rice · broccoli", diet:["omni"], avoid:["fish"], cheap:false },
+    { n:"Chicken fajitas ×3", k:660, p:45, per:"150 g chicken · 3 tortillas · peppers · salsa", diet:["omni"], avoid:[], cheap:true },
+    { n:"Bean chili + rice", k:600, p:26, per:"1 can mixed beans · 100 g rice · chili sauce", diet:["omni","veg","vegan"], avoid:[], cheap:true },
+    { n:"Egg fried rice + veg", k:590, p:26, per:"3 eggs · 100 g rice · frozen veg · soy sauce", diet:["omni","veg"], avoid:["eggs"], cheap:true },
+    { n:"Lentil bolognese + pasta", k:610, p:28, per:"200 g lentils · 100 g pasta · tomato sauce", diet:["omni","veg","vegan"], avoid:[], cheap:true }
+  ],
+  snack: [
+    { n:"Whey shake + banana", k:250, p:26, per:"1 scoop whey · 1 banana · water", diet:["omni","veg"], avoid:["dairy"], cheap:true },
+    { n:"Greek yogurt + berries", k:200, p:20, per:"200 g Greek yogurt · frozen berries", diet:["omni","veg"], avoid:["dairy"], cheap:true },
+    { n:"Peanut butter toast + milk", k:320, p:16, per:"2 slices toast · 25 g PB · 250 ml milk", diet:["omni","veg"], avoid:["nuts","dairy"], cheap:true },
+    { n:"Hummus + pitta + carrots", k:280, p:10, per:"100 g hummus · 1 pitta · carrots", diet:["omni","veg","vegan"], avoid:[], cheap:true },
+    { n:"Soy yogurt + granola", k:230, p:12, per:"200 g soy yogurt · 30 g granola", diet:["omni","veg","vegan"], avoid:[], cheap:true },
+    { n:"Boiled eggs ×2 + apple", k:220, p:14, per:"2 eggs · 1 apple", diet:["omni","veg"], avoid:["eggs"], cheap:true }
+  ]
+};
+function foodPool(slot, q){
+  let pool = FOODS[slot].filter(f => f.diet.includes(q.diet) && !f.avoid.some(a => q.avoid.includes(a)));
+  if (q.budget === "tight"){ const cheap = pool.filter(f => f.cheap); if (cheap.length >= 2) pool = cheap; }
+  return pool.length ? pool : FOODS[slot].filter(f => f.diet.includes(q.diet));
+}
+function buildDiet(q, kcalTarget, proteinTarget){
+  const slots = q.meals === "4" ? ["breakfast","lunch","snack","dinner"] : ["breakfast","lunch","dinner","snack"];
+  const pools = Object.fromEntries(slots.map(s => [s, foodPool(s, q)]));
+  const days = [];
+  for (let d = 0; d < 7; d++){
+    const meals = slots.map(s => {
+      const pool = pools[s];
+      return { slot:s, ...pool[d % pool.length] };
+    });
+    const baseK = meals.reduce((s,m) => s+m.k, 0);
+    const scale = clamp(kcalTarget / baseK, 0.75, 1.35);
+    const scaled = meals.map(m => ({ ...m, k:Math.round(m.k*scale), p:Math.round(m.p*scale), scale }));
+    days.push({ meals:scaled, kcal:scaled.reduce((s,m)=>s+m.k,0), protein:scaled.reduce((s,m)=>s+m.p,0) });
+  }
+  // grocery list = unique portion lines across the week
+  const grocery = [...new Set(days.flatMap(d => d.meals.map(m => m.per.split(" · ")).flat()))];
+  return { days, grocery, protein:proteinTarget };
+}
+
+/* ============ BODY & PLAN ============ */
+function bodyComp(q){
+  const bmi = q.w/((q.h/100)**2);
+  const bmr = 10*q.w + 6.25*q.h - 5*q.age + (q.sex==="m"?5:-161);
+  const act = { low:1.35, mid:1.5, high:1.65 }[q.steps] + (q.train==="none"?0:0.07);
+  const maint = Math.round(bmr*act);
+  return { bmi, maint };
+}
+
+$("genPlan").addEventListener("click", () => {
+  const h = +$("qHeight").value, w = +$("qWeight").value;
+  if (!h || !w){ alert("Height and weight are needed for accurate targets."); return; }
+  const q = {
+    age:+$("qAge").value||17, sex:$("qSex").value, h, w,
+    train:$("qTrain").value, goal:$("qGoal").value, sleep:$("qSleep").value,
+    steps:$("qSteps").value, skincare:$("qSkincare").value,
+    diet:$("qDiet").value, meals:$("qMeals").value, avoid:picked("qAvoid"),
+    budget:$("qBudget").value, cook:$("qCook").value,
+    skin:picked("qSkinIssues"), muscles:picked("qMuscles"), blocker:$("qBlocker").value
+  };
+  const firstPlan = !localStorage.getItem(LS.plan);
+  const plan = buildPlan(q);
+  localStorage.setItem(LS.plan, JSON.stringify(plan));
+  renderPlan(plan); renderTracker();
+  if (firstPlan) addXP(50, "first plan generated");
+  document.getElementById("plan").scrollIntoView({ behavior:"smooth" });
+});
+
+function buildPlan(q){
+  const bc = bodyComp(q);
+  const protein = Math.round(q.w*1.8);
+  const kcal = q.goal==="lean" ? bc.maint-400 : q.goal==="muscle" ? bc.maint+250 : bc.maint;
+  const diet = buildDiet(q, kcal, protein);
+
+  let gym;
+  if (q.train==="none" || q.train==="beginner"){
+    gym = [
+      "<b>Phase 1 — Foundation (12 weeks, 3 days/wk).</b> This is the exact base every shredded physique was built on — skipping it is why most people spin their wheels for years.",
+      "<b>Mon — Full body A:</b> Back squat 3×5 (start light, +2.5 kg every session) · Bench press 3×5 (+2.5 kg/session) · One-arm DB row 3×8–12 · Plank 3×45 s — rest 2–3 min on barbell lifts",
+      "<b>Wed — Full body B:</b> Romanian deadlift 3×5 (+2.5–5 kg/session) · Overhead press 3×5 (+1.25 kg/session) · Lat pulldown or assisted pull-up 3×8–12 · Farmer carry 3×30 m",
+      "<b>Fri — Full body C:</b> Front squat or leg press 3×8 · Incline DB press 3×8–12 · Seated cable row 3×8–12 · Face pulls 3×15 · hanging knee raises 3×10",
+      "<b>Progression rule:</b> every lift, every session, add the smallest plates in the gym until a set hits RPE 9 (one rep left in the tank). Fail twice → drop 10% and climb again. This linear run is the fastest strength gain of your life — ride it to the end before touching fancier programming.",
+      "<b>After 12 weeks</b> regenerate your plan as Intermediate and the app hands you the DUP programming below."
+    ];
+  } else if (q.train==="intermediate"){
+    gym = [
+      "<b>Upper/Lower DUP — 4 days/wk.</b> Two heavy days, two volume days: strength and size in the same week (daily undulating periodization).",
+      "<b>Mon — Upper Strength:</b> Bench 4×4 @ RPE 8, rest 3 min · Weighted pull-up 4×5 · OHP 3×6 · Barbell row 3×6 · Face pulls 3×15",
+      "<b>Tue — Lower Strength:</b> Squat 4×4 @ RPE 8, rest 3 min · RDL 3×5 · Leg press 3×8 · Standing calf raise 4×8 · Hanging leg raise 3×10",
+      "<b>Thu — Upper Volume:</b> Incline DB press 4×10 · Chest-supported row 4×10–12 · Machine fly 3×12–15 · Lateral raise 4×15 · Curls + triceps superset 3×12 each",
+      "<b>Fri — Lower Volume:</b> Front squat or hack squat 4×8–10 · Hip thrust 3×10 · Leg curl 3×12 · Walking lunges 3×12/leg · Seated calf 4×12",
+      "<b>Progression:</b> strength days +2.5 kg when all sets hit clean · volume days add reps to the top of the range, then add weight. Deload (–40% volume) every 6th week."
+    ];
+  } else {
+    gym = [
+      "<b>6-day PPL×2 DUP — the David Laid structure.</b> Every muscle twice a week: first hit heavy for strength, second hit high-volume for size. Push A · Pull A · Legs A · Push B · Pull B · Legs B · rest.",
+      "<b>Push A (strength):</b> Bench — top set 3–5 reps @ RPE 8–9, then 3×5 back-offs @ 85% of top set · OHP 3×6 · Incline DB 3×8 · Weighted dips 3×8 · Lateral raise 4×12–15 · Overhead triceps ext 3×10 — rest 3–4 min on bench",
+      "<b>Pull A (strength):</b> Deadlift — top set 3–5 @ RPE 8–9 + 2×3 back-offs · Weighted pull-up 4×5–6 · Pendlay row 4×6–8 · Rear-delt fly 3×15 · Barbell curl 3×8",
+      "<b>Legs A (strength):</b> Squat — top set 3–5 @ RPE 8–9 + 3×5 back-offs @ 85% · RDL 3×6–8 · Leg press 3×10 · Standing calf 4×8 · Ab wheel 3×10",
+      "<b>Push B (volume):</b> Incline barbell 4×8–10 · Flat DB press 3×10–12 · Cable fly 3×12–15 · Lateral raise 5×15–20 (delts love volume) · Triceps pushdown + skullcrusher superset 3×12",
+      "<b>Pull B (volume):</b> Lat pulldown 4×10–12 · Seated cable row 4×10–12 · Rear-delt fly 4×15–20 · Shrugs 3×12 · Incline curl + hammer curl superset 4×10–15",
+      "<b>Legs B (volume):</b> Front squat 4×8–10 · Hip thrust 3×8–10 · Walking lunges 3×12/leg · Leg extension + leg curl superset 3×12–15 · Seated calf 4×15",
+      "<b>4-week wave on the big lifts:</b> wk1 top sets of 5 (~82%) → wk2 triples (~87%) → wk3 heavy double/single (~92%+) → wk4 deload (–30% volume, –10% load). Then restart the wave heavier than last month.",
+      "<b>Reality check:</b> this is the structure David Laid actually trained with — but his physique is also 8+ years of it, calories tracked, sleep protected, zero missed months. The program works; the timeline is the price. Your rank ladder below tells you it's working."
+    ];
+  }
+
+  const FOCUS = {
+    chest:"<b>Chest:</b> add incline DB press 3×8–12 + fly 2×12–15 as a second weekly hit",
+    back:"<b>Back:</b> add heavy pulldown/pull-ups 3×6–10 + chest-supported row 3×8–12",
+    shoulders:"<b>Shoulders:</b> lateral raises 4×12–20 twice a week — side delts = width",
+    arms:"<b>Arms:</b> incline curls 3×8–12 + overhead triceps extensions 3×10–15",
+    legs:"<b>Legs:</b> extra squat-pattern day — hack squat or leg press 3×8–12 + leg curl 3×10–15",
+    glutes:"<b>Glutes:</b> hip thrusts 3×8–12 + Bulgarian split squats 3×10/leg",
+    abs:"<b>Abs:</b> cable crunch 3×10–15 + hanging leg raises 3×8–12",
+    posture:"<b>Posture:</b> chin tucks 3×10 daily + face pulls 3×15 + wall slides 2×10"
+  };
+  const focusWork = (q.muscles||[]).map(g => FOCUS[g]).filter(Boolean);
+
+  const morning = ["Gentle cleanser → moisturizer → SPF 30+"];
+  const evening = ["Cleanser → moisturizer"];
+  if (q.skin.includes("acne")) evening.push("Adapalene 0.1% — pea size, 3 nights/week building to nightly; judge at week 8–12");
+  if (q.skin.includes("oily")) morning.push("Gel cleanser + oil-free moisturizer");
+  if (q.skin.includes("dry")) evening.push("Richer night moisturizer; shorter, cooler showers");
+  if (q.skin.includes("dark")) evening.push("Dark circles respond to sleep more than any cream");
+
+  const daily = [
+    { t:"Morning skincare + SPF" }, { t:"Evening skincare" },
+    { t: q.sleep==="lt6"||q.sleep==="6to7" ? "In bed 30 min earlier" : "Protect 7–9 h sleep" },
+    { t:"2 L+ water" },
+    { t: q.steps==="low" ? "30-min walk" : "Training session or 8k+ steps" },
+    { t:`Hit ~${protein} g protein (plan does it for you)` },
+    { t:"Posture: 3× chin tucks, screens at eye level" },
+    { t:"60-second outfit check" }
+  ];
+  if (q.blocker==="social") daily.push({ t:"One social rep — start a conversation" });
+
+  return { q, bc, kcal, protein, diet, gym, focusWork, morning, evening, daily, made:todayKey() };
+}
+
+function renderPlan(plan){
+  $("planEmpty").classList.add("hidden");
+  $("planOut").classList.remove("hidden");
+  const goalTxt = { lean:"lean out", muscle:"build muscle", recomp:"recomp", health:"feel better" }[plan.q.goal];
+  $("bodyStats").innerHTML =
+    `<div style="display:flex;gap:26px;flex-wrap:wrap;font-size:.95rem">
+       <div><b>${plan.kcal}</b><div class="small">kcal/day to ${goalTxt}</div></div>
+       <div><b>${plan.protein} g</b><div class="small">protein/day</div></div>
+       <div><b>${plan.bc.maint}</b><div class="small">maintenance kcal</div></div>
+       <div><b>${f1(plan.bc.bmi)}</b><div class="small">BMI (info only — it can't see muscle)</div></div>
+     </div>`;
+  const dayNames = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+  $("dietSummary").textContent = `Built for ${plan.q.diet==="omni"?"an omnivore":plan.q.diet==="veg"?"a vegetarian":"a vegan"} on a ${plan.q.budget==="tight"?"tight":"normal"} budget · ${plan.q.meals==="4"?"4 meals":"3 meals + snack"} · targets ${plan.kcal} kcal & ${plan.protein} g protein daily. Portions are starting points — hungry on a rest day? Shrink the carbs, keep the protein.`;
+  $("dietPlan").innerHTML = plan.diet.days.map((d,i) =>
+    `<details class="mealday" ${i===0?"open":""}><summary><span>${dayNames[i]}</span><span class="macros">${d.kcal} kcal · ${d.protein} g protein</span></summary>
+      <div class="m-body">${d.meals.map(m =>
+        `<div class="meal"><b>${m.slot[0].toUpperCase()+m.slot.slice(1)} — ${m.n}</b>
+         <div class="small">${m.per}${m.scale>1.05?` · portions ×${m.scale.toFixed(2)}`:m.scale<0.95?` · portions ×${m.scale.toFixed(2)}`:""}</div>
+         <div class="macros">${m.k} kcal · ${m.p} g protein</div></div>`).join("")}
+      </div></details>`).join("");
+  $("groceryList").innerHTML = `<b>Weekly grocery list:</b> ` + plan.diet.grocery.join(" · ");
+  const ul = a => `<ul>${a.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+  $("planLeft").innerHTML =
+    `<div class="plan-block"><h3><span>—</span> Morning routine</h3>${ul(plan.morning)}</div>
+     <div class="plan-block"><h3><span>—</span> Evening routine</h3>${ul(plan.evening)}</div>`;
+  $("planRight").innerHTML =
+    `<div class="plan-block"><h3><span>—</span> Training</h3>${ul(plan.gym)}</div>
+     ${plan.focusWork?.length ? `<div class="plan-block"><h3><span>—</span> Priority muscle work</h3>${ul(plan.focusWork)}</div>` : ""}`;
+}
+
+/* ============ TRACKER + XP HOOKS ============ */
+function getChecks(){ try{ return JSON.parse(localStorage.getItem(LS.checks))||{}; }catch{ return {}; } }
+function renderTracker(){
+  const plan = JSON.parse(localStorage.getItem(LS.plan)||"null");
+  if (!plan) return;
+  const checks = getChecks(), today = checks[todayKey()]||[];
+  $("taskList").innerHTML = plan.daily.map((d,i) =>
+    `<div class="day-task ${today.includes(i)?"done":""}" data-i="${i}"><div class="check">${today.includes(i)?"✓":""}</div><div class="t">${d.t}</div><span class="xp">+10 XP</span></div>`).join("");
+  $("taskList").querySelectorAll(".day-task").forEach(el => el.addEventListener("click", () => {
+    const i = +el.dataset.i, c = getChecks(), k = todayKey();
+    c[k] = c[k]||[];
+    if (c[k].includes(i)){ c[k] = c[k].filter(x=>x!==i); }   // un-check: no XP clawback drama, but no re-farm either
+    else {
+      c[k].push(i);
+      const farmed = (c._xp?.[k]||[]);
+      if (!farmed.includes(i)){
+        farmed.push(i);
+        c._xp = { ...(c._xp||{}), [k]:farmed };
+        addXP(10, "habit done");
+        if (c[k].length === plan.daily.length) addXP(25, "full day cleared!");
+      }
+    }
+    localStorage.setItem(LS.checks, JSON.stringify(c));
+    renderTracker();
+  }));
+  /* Liftoff-style streak: rest days count, you only break after 3 empty days */
+  let streak = 0;
+  const dates = Object.keys(checks).filter(k => !k.startsWith("_") && checks[k]?.length).sort();
+  if (dates.length){
+    const gapNow = Math.round((new Date(todayKey()) - new Date(dates[dates.length-1]))/86400000);
+    if (gapNow <= 3){
+      streak = 1 + gapNow;
+      for (let i = dates.length-1; i > 0; i--){
+        const gap = Math.round((new Date(dates[i]) - new Date(dates[i-1]))/86400000);
+        if (gap <= 3) streak += gap; else break;
+      }
+      if (!checks[todayKey()]?.length) streak -= 1;   // today not logged yet: alive but not counted
+    }
+  }
+  if (streak > 0 && streak % 7 === 0 && localStorage.getItem("rm_streak_"+streak) !== "1"){
+    localStorage.setItem("rm_streak_"+streak, "1");
+    addXP(100, streak+"-day streak!");
+  }
+  $("streakNow").textContent = streak;
+  $("doneToday").textContent = `${today.length}/${plan.daily.length}`;
+  $("xpToday").textContent = (checks._xp?.[todayKey()]?.length||0)*10 + (today.length===plan.daily.length?25:0);
+}
+
+/* check-ins */
+const getCI = () => { try{ return JSON.parse(localStorage.getItem(LS.ci))||[]; }catch{ return []; } };
+$("ciLog").addEventListener("click", () => {
+  const w = +$("ciWeight").value;
+  if (!w){ alert("Weight is required."); return; }
+  const a = getCI().filter(e => e.d !== todayKey());
+  const isNew = a.length === getCI().length;
+  a.push({ d:todayKey(), w, waist:+$("ciWaist").value||null });
+  a.sort((x,y) => x.d.localeCompare(y.d));
+  localStorage.setItem(LS.ci, JSON.stringify(a));
+  $("ciWeight").value = ""; $("ciWaist").value = "";
+  if (isNew) addXP(30, "weekly check-in");
+  renderCheckins();
+});
+function renderCheckins(){
+  const a = getCI();
+  $("ciList").innerHTML = !a.length ? `<p class="small">No check-ins yet.</p>` :
+    a.slice(-6).reverse().map(e => {
+      const prev = a[a.indexOf(e)-1];
+      const d = prev ? (e.w-prev.w) : 0;
+      const delta = prev ? ` <span class="small" style="color:${d<=0?'var(--accent)':'var(--amber)'}">(${d>0?"+":""}${d.toFixed(1)} kg)</span>` : "";
+      return `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:.9rem"><span>${e.d}</span><span><b>${e.w} kg</b>${e.waist?` · ${e.waist} cm`:""}${delta}</span></div>`;
+    }).join("");
+  drawChart(a);
+}
+function drawChart(a){
+  const c = $("ciChart"), ctx = c.getContext("2d");
+  ctx.clearRect(0,0,c.width,c.height);
+  ctx.font = "13px Inter, sans-serif";
+  if (a.length < 2){ ctx.fillStyle = "#7e8798"; ctx.fillText("Log two check-ins to see your trend.", 20, c.height/2); return; }
+  const P = 42, W = c.width-P*2, H = c.height-P*2;
+  const xs = i => P + W*(i/(a.length-1));
+  const series = (vals, color) => {
+    const nums = vals.filter(v => v!=null);
+    if (nums.length < 2) return;
+    const lo = Math.min(...nums)-1, hi = Math.max(...nums)+1;
+    const ys = v => P + H - H*((v-lo)/(hi-lo));
+    ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.beginPath();
+    let started = false;
+    vals.forEach((v,i) => { if (v==null) return; started ? ctx.lineTo(xs(i),ys(v)) : ctx.moveTo(xs(i),ys(v)); started = true; });
+    ctx.stroke(); ctx.fillStyle = color;
+    vals.forEach((v,i) => { if (v==null) return; ctx.beginPath(); ctx.arc(xs(i),ys(v),4,0,7); ctx.fill(); });
+  };
+  ctx.strokeStyle = "#1d2330"; ctx.lineWidth = 1;
+  [0,.25,.5,.75,1].forEach(t => { ctx.beginPath(); ctx.moveTo(P,P+H*t); ctx.lineTo(P+W,P+H*t); ctx.stroke(); });
+  series(a.map(e=>e.w), "#3ee6a0");
+  series(a.map(e=>e.waist), "#6ea8ff");
+  ctx.fillStyle = "#7e8798";
+  ctx.fillText(a[0].d, P-10, c.height-12);
+  ctx.fillText(a[a.length-1].d, P+W-58, c.height-12);
+}
+
+const MOTIV = [
+  "Nobody remembers your bad hair day. Everybody notices your consistency.",
+  "You don't need motivation to wash your face. You need 90 seconds.",
+  "The gym doesn't care how you look today. That's the point of it.",
+  "A 1% better day is still a better day. Log it.",
+  "Confidence is just evidence. Go collect some.",
+  "Missing once is life. Missing twice is a decision.",
+  "The only fair comparison is with yesterday's you.",
+  "Sleep is the only legal performance enhancer.",
+  "Small reps in private become presence in public.",
+  "Protein at every meal beats any supplement you can buy.",
+  "The mirror lies daily. The monthly photo tells the truth.",
+  "Show up tired if you have to. Showing up is the whole game."
+];
+$("motivMsg").textContent = "“" + MOTIV[Math.floor(Date.now()/86400000)%MOTIV.length] + "”";
+
+/* ============ LIFT RANKS (Liftoff-inspired: 1RM ÷ bodyweight → rank + LP) ============ */
+const RANKS = ["Wood","Bronze","Silver","Gold","Platinum","Emerald","Diamond","Master","Titan","Olympian"];
+const RANK_COLORS = { Wood:"#8a6a4f", Bronze:"#b0783c", Silver:"#7e8ea0", Gold:"#c9971a", Platinum:"#2fb5a8",
+                      Emerald:"#2aa866", Diamond:"#4a9de8", Master:"#8b5cf6", Titan:"#e0498a", Olympian:"#e8890c" };
+/* thresholds[i] = bodyweight multiple needed to ENTER RANKS[i+1]; last value scales Olympian LP */
+const STANDARDS = {
+  m: { bench:[.35,.55,.75,.95,1.15,1.35,1.55,1.8,2.05], squat:[.5,.8,1.05,1.3,1.55,1.85,2.15,2.5,2.9],
+       deadlift:[.6,.95,1.25,1.55,1.9,2.25,2.6,3.0,3.4], ohp:[.25,.38,.5,.62,.75,.88,1.02,1.18,1.35] },
+  f: { bench:[.2,.35,.5,.65,.8,.95,1.1,1.3,1.5], squat:[.4,.65,.85,1.1,1.35,1.6,1.9,2.2,2.55],
+       deadlift:[.5,.8,1.05,1.35,1.65,1.95,2.3,2.65,3.05], ohp:[.15,.25,.34,.44,.55,.66,.78,.92,1.08] }
+};
+const LIFTS = { bench:"Bench press", squat:"Squat", deadlift:"Deadlift", ohp:"Overhead press" };
+const est1RM = (w,r) => r<=1 ? w : w*(1+r/30);   // Epley
+
+function rankFor(lift, sex, ratio){
+  const th = STANDARDS[sex][lift];
+  let idx = 0;
+  while (idx < th.length && ratio >= th[idx]) idx++;
+  const lower = idx===0 ? 0 : th[idx-1];
+  const upper = idx < th.length ? th[idx] : th[th.length-1]*1.2;
+  const lp = Math.round(clamp((ratio-lower)/(upper-lower), 0, 1)*100);
+  return { rank:RANKS[idx], idx, lp, score:idx*100+lp };
+}
+
+const getLifts = () => { try{ return JSON.parse(localStorage.getItem("rm_lifts"))||{}; }catch{ return {}; } };
+
+$("rkRank").addEventListener("click", () => {
+  const bw = +$("rkBW").value || +$("qWeight").value;
+  if (!bw){ alert("Bodyweight is needed — it's what your lifts are measured against."); return; }
+  const sex = $("rkSex").value;
+  const inputs = { bench:["rkBenchW","rkBenchR"], squat:["rkSquatW","rkSquatR"], deadlift:["rkDeadW","rkDeadR"], ohp:["rkOhpW","rkOhpR"] };
+  const prev = getLifts();
+  const next = { bw, sex, updated:todayKey(), lifts:{} };
+  let any = false, rankedUp = [];
+  for (const [lift,[wi,ri]] of Object.entries(inputs)){
+    const w = +$(wi).value, r = +$(ri).value||1;
+    if (!w) { if (prev.lifts?.[lift]) next.lifts[lift] = prev.lifts[lift]; continue; }
+    if (r > 15){ toast("Reps over 15 make 1RM estimates unreliable — go heavier"); }
+    any = true;
+    const rm = est1RM(w, Math.min(r,15));
+    const rk = rankFor(lift, sex, rm/bw);
+    next.lifts[lift] = { w, r, rm:Math.round(rm), ...rk };
+    const old = prev.lifts?.[lift];
+    if (old && rk.idx > old.idx) rankedUp.push(`${LIFTS[lift]} → ${rk.rank}`);
+  }
+  if (!any && !Object.keys(next.lifts).length){ alert("Enter at least one lift."); return; }
+  localStorage.setItem("rm_lifts", JSON.stringify(next));
+  if (rankedUp.length) addXP(40*rankedUp.length, "RANK UP! "+rankedUp.join(" · "));
+  else if (any && localStorage.getItem("rm_lift_day") !== todayKey()){
+    localStorage.setItem("rm_lift_day", todayKey());
+    addXP(15, "lifts logged");
+  }
+  renderRanks();
+});
+
+function renderRanks(){
+  const data = getLifts();
+  if (!data.lifts || !Object.keys(data.lifts).length) return;
+  if (data.bw) $("rkBW").value = data.bw;
+  const entries = Object.entries(data.lifts);
+  const avgScore = entries.reduce((s,[,l]) => s+l.score, 0)/entries.length;
+  const overallIdx = clamp(Math.floor(avgScore/100), 0, 9);
+  const overallLP = Math.round(avgScore - overallIdx*100);
+  const overall = RANKS[overallIdx];
+  const cardHTML = (name, rk, sub) =>
+    `<div style="border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <b style="font-size:.92rem">${name}</b>
+        <span style="font-weight:800;color:${RANK_COLORS[rk.rank]}">${rk.rank} <span style="font-size:.75rem;font-weight:600;color:var(--muted)">${rk.lp} LP</span></span>
+      </div>
+      <div class="xpbar" style="height:8px;margin-top:8px"><i style="width:${rk.lp}%;background:${RANK_COLORS[rk.rank]}"></i></div>
+      ${sub?`<div class="small" style="margin-top:6px">${sub}</div>`:""}
+    </div>`;
+  $("rkOut").innerHTML =
+    `<div style="text-align:center;margin-bottom:16px">
+      <div class="small" style="text-transform:uppercase;letter-spacing:.1em;font-weight:700">Overall rank</div>
+      <div class="serif" style="font-size:2.6rem;font-weight:700;color:${RANK_COLORS[overall]};line-height:1.15">${overall}</div>
+      <div class="small">${overallLP} LP · average of your lift scores</div>
+    </div>` +
+    entries.map(([lift,l]) => cardHTML(LIFTS[lift], l, `Best: ${l.w} kg × ${l.r} → est. 1RM ${l.rm} kg (${(l.rm/data.bw).toFixed(2)}× BW)`)).join("") +
+    `<p class="small" style="margin-top:8px">Ladder: ${RANKS.join(" → ")}. Standards scale with bodyweight and sex — a 60 kg lifter and a 100 kg lifter compete fairly.</p>`;
+}
+
+/* ============ CLOUD: SUPABASE AUTH + CHAT (free tier) ============ */
+let sb = null, me = null, myProfile = null, curChan = "general";
+const CHANNELS = ["general","wins","fitness","food","skincare","style","accountability"];
+const BANNED = ["kys","kill yourself","subhuman","it's over","its over","ropemaxx","sub5","sub-5"];
+const cloudReady = () => !!(SUPABASE_URL && SUPABASE_ANON_KEY);
+
+async function initCloud(){
+  renderAuth();          // renders local or cloud state
+  if (!cloudReady()) return;
+  const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+  sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  sb.auth.onAuthStateChange(async (_e, session) => {
+    me = session?.user || null;
+    if (me) await loadProfile();
+    renderAuth(); renderChatGate();
+  });
+  const { data:{ session } } = await sb.auth.getSession();
+  me = session?.user || null;
+  if (me) await loadProfile();
+  renderAuth(); renderChatGate();
+}
+
+async function loadProfile(){
+  const { data } = await sb.from("profiles").select("*").eq("id", me.id).maybeSingle();
+  myProfile = data;
+  if (!myProfile){
+    const username = (me.user_metadata?.name || me.email?.split("@")[0] || "riser").replace(/[^a-z0-9_]/gi,"").slice(0,18) || "riser";
+    const { data:created } = await sb.from("profiles").insert({ id:me.id, username, xp:getXP(), level:levelFor(getXP()).n }).select().maybeSingle();
+    myProfile = created;
+  } else if (myProfile.xp > getXP()){
+    localStorage.setItem(LS.xp, myProfile.xp);   // pull higher cloud XP to this device
+    renderXP();
+  }
+}
+async function cloudSyncXP(xp, level){
+  if (sb && me) await sb.from("profiles").update({ xp, level }).eq("id", me.id);
+}
+
+function renderAuth(){
+  const box = $("authBox");
+  if (!cloudReady()){
+    box.innerHTML = `<h3>Solo mode</h3>
+      <p class="small" style="margin-top:8px">Accounts and community chat switch on when the site owner connects the free backend (see SETUP_GUIDE.md — 15 minutes). Everything else works right now: plans, tracker, XP and levels are saved on this device.</p>
+      <div class="note"><b>Site owner?</b> Open the code and paste your Supabase URL + anon key into the CONFIG block at the top of the script, then follow SETUP_GUIDE.md for sign-in with Google and Discord.</div>`;
+    return;
+  }
+  if (me){
+    box.innerHTML = `<h3>Welcome back, ${myProfile?.username || "riser"} 👋</h3>
+      <p class="small" style="margin-top:8px">Signed in as ${me.email || "OAuth user"} · XP syncs across your devices.</p>
+      <button class="btn sec" id="signOut">Sign out</button>`;
+    $("signOut").addEventListener("click", async () => { await sb.auth.signOut(); });
+    return;
+  }
+  box.innerHTML = `<h3>Sign in / sign up</h3>
+    <label>Email</label><input id="authEmail" type="email" placeholder="you@example.com">
+    <label>Password</label><input id="authPass" type="password" placeholder="••••••••">
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn" id="signIn">Sign in</button>
+      <button class="btn sec" id="signUp">Create account</button>
+    </div>
+    <div class="oauth">
+      <button id="oGoogle">Continue with Google</button>
+      <button id="oDiscord">Continue with Discord</button>
+    </div>
+    <p class="small" style="margin-top:12px">Sign in with Apple coming later (Apple charges developers $99/yr for it — we're keeping this free first). No spam, no selling your data, ever.</p>
+    <p class="small" id="authMsg" style="color:var(--amber)"></p>`;
+  $("signIn").addEventListener("click", async () => {
+    const { error } = await sb.auth.signInWithPassword({ email:$("authEmail").value, password:$("authPass").value });
+    $("authMsg").textContent = error ? error.message : "";
+  });
+  $("signUp").addEventListener("click", async () => {
+    const { error } = await sb.auth.signUp({ email:$("authEmail").value, password:$("authPass").value });
+    $("authMsg").textContent = error ? error.message : "Check your email to confirm your account ✓";
+  });
+  $("oGoogle").addEventListener("click", () => sb.auth.signInWithOAuth({ provider:"google" }));
+  $("oDiscord").addEventListener("click", () => sb.auth.signInWithOAuth({ provider:"discord" }));
+}
+
+/* ---- chat ---- */
+let chatSub = null, lastSent = 0;
+function renderChatGate(){
+  const ok = sb && me;
+  $("chatGate").classList.toggle("hidden", ok);
+  $("chatUI").classList.toggle("hidden", !ok);
+  if (ok) openChat();
+}
+function renderChans(){
+  $("chanList").innerHTML = CHANNELS.map(c =>
+    `<div class="chan ${c===curChan?"on":""}" data-c="${c}"># ${c}</div>`).join("");
+  $("chanList").querySelectorAll(".chan").forEach(el => el.addEventListener("click", () => {
+    curChan = el.dataset.c; openChat();
+  }));
+}
+async function openChat(){
+  renderChans();
+  const { data } = await sb.from("messages").select("*").eq("channel", curChan).order("created_at", { ascending:false }).limit(50);
+  $("msgs").innerHTML = (data||[]).reverse().map(msgHTML).join("");
+  $("msgs").scrollTop = $("msgs").scrollHeight;
+  if (chatSub) sb.removeChannel(chatSub);
+  chatSub = sb.channel("chat-"+curChan)
+    .on("postgres_changes", { event:"INSERT", schema:"public", table:"messages", filter:`channel=eq.${curChan}` },
+      payload => { $("msgs").insertAdjacentHTML("beforeend", msgHTML(payload.new)); $("msgs").scrollTop = $("msgs").scrollHeight; })
+    .subscribe();
+}
+function esc(s){ return s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function msgHTML(m){
+  const when = new Date(m.created_at).toLocaleTimeString([], { hour:"2-digit", minute:"2-digit" });
+  return `<div class="msg"><span class="lv">Lv ${m.level||1}</span><span class="who">${esc(m.username||"riser")}</span>${esc(m.content)}<span class="when">${when}</span><span class="rep" data-id="${m.id}" onclick="reportMsg(${m.id})">report</span></div>`;
+}
+window.reportMsg = async id => {
+  if (!sb || !me) return;
+  await sb.from("reports").insert({ message_id:id, reporter:me.id, reason:"user report" });
+  toast("Reported — thank you for keeping it kind");
+};
+async function sendMsg(){
+  const inp = $("msgInput"), text = inp.value.trim();
+  if (!text || !sb || !me) return;
+  if (Date.now() - lastSent < 3000){ toast("Slow mode: one message every 3 s"); return; }
+  const low = " " + text.toLowerCase() + " ";
+  if (BANNED.some(b => low.includes(b))){ toast("That's blackpill talk — not here. Hype or help instead 💚"); return; }
+  lastSent = Date.now();
+  inp.value = "";
+  await sb.from("messages").insert({ channel:curChan, user_id:me.id, username:myProfile?.username||"riser", level:levelFor(getXP()).n, content:text.slice(0,500) });
+}
+$("msgSend").addEventListener("click", sendMsg);
+$("msgInput").addEventListener("keydown", e => { if (e.key === "Enter") sendMsg(); });
+
+/* ============ BOOT ============ */
+const savedPlan = JSON.parse(localStorage.getItem(LS.plan)||"null");
+if (savedPlan && savedPlan.diet){ renderPlan(savedPlan); renderTracker(); }
+renderXP();
+renderCheckins();
+renderRanks();
+initCloud();
+// UMBRA v7 — dark edition
+</script>
+</body>
+</html>
