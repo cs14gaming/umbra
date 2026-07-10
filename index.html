@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
 <title>UMBRA — Level Up In The Dark</title>
-<meta name="description" content="UMBRA: the judgment-free glow-up app. Build your own routine, count calories, level up, and get hyped by a community that lifts you up instead of rating you.">
+<meta name="description" content="UMBRA: the judgment-free glow-up app. Follow real programs, build your own routine, count calories, level up, and get hyped by a community that lifts you up instead of rating you.">
 <meta name="theme-color" content="#0a0a0a">
 
 <!-- Add to Home Screen (PWA) -->
@@ -57,23 +57,21 @@ input:focus,select:focus,textarea:focus{border-color:var(--gold)}
 .muted{color:var(--muted)}
 .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
-/* ---------- app frame (phone column) ---------- */
 #app{max-width:500px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;position:relative;background:var(--bg)}
-@media(min-width:520px){#app{border-left:1px solid var(--line);border-right:1px solid var(--line)}
-  body{background:#000}}
+@media(min-width:520px){#app{border-left:1px solid var(--line);border-right:1px solid var(--line)} body{background:#000}}
 
 header#top{position:sticky;top:0;z-index:30;background:rgba(10,10,11,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
   padding:calc(10px + env(safe-area-inset-top)) 16px 10px;display:flex;align-items:center;gap:10px}
 header#top .logo{font-family:Oswald;font-weight:700;font-size:1.15rem;letter-spacing:.06em;display:flex;align-items:center;gap:8px}
 header#top .logo svg{width:22px;height:22px}
 .hchip{margin-left:auto;display:flex;align-items:center;gap:6px;font-weight:800;font-size:.8rem;padding:6px 11px;border-radius:999px;background:var(--grad-soft);border:1px solid var(--line-2)}
-.hchip.flame{background:rgba(255,122,60,.12)}
+.hchip.flame{background:rgba(255,122,60,.12);margin-left:auto}
+.hchip.flame+.hchip{margin-left:8px}
 
 main#main{flex:1;overflow-y:auto;padding:16px 16px calc(var(--tab-h) + 26px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
 .view{animation:fade .25s ease}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* ---------- tab bar ---------- */
 nav#tabs{position:fixed;bottom:0;left:0;right:0;max-width:500px;margin:0 auto;z-index:40;
   height:calc(var(--tab-h) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);
   background:rgba(12,12,14,.92);backdrop-filter:blur(16px);border-top:1px solid var(--line);
@@ -83,12 +81,12 @@ nav#tabs button svg{width:23px;height:23px;stroke-width:2}
 nav#tabs button.on{color:var(--gold)}
 nav#tabs button.on svg{stroke:var(--gold)}
 
-/* ---------- cards / bits ---------- */
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
 .card+.card,.stack>*+*{margin-top:12px}
 .eyebrow{font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 h2.title{font-family:Oswald;font-weight:700;font-size:1.5rem;letter-spacing:.01em;text-transform:uppercase;margin:2px 0 12px}
 h3{font-size:1rem;font-weight:800}
+h4{font-size:1.05rem;font-weight:800}
 .row{display:flex;align-items:center;gap:10px}
 .spread{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .btn{background:var(--grad);color:#1a0f00;font-weight:800;border-radius:12px;padding:14px 18px;font-size:.9rem;text-align:center;letter-spacing:.02em;display:block;width:100%}
@@ -97,28 +95,21 @@ h3{font-size:1rem;font-weight:800}
 .btn.sm{padding:9px 14px;font-size:.82rem;width:auto;display:inline-block;border-radius:10px}
 .btn.ghost{background:none;border:1px solid var(--line-2);color:var(--ink-2)}
 .pill{display:inline-block;padding:5px 11px;border-radius:999px;background:var(--card-2);border:1px solid var(--line-2);font-size:.75rem;font-weight:700;color:var(--ink-2)}
-.pill.on{background:var(--grad);color:#1a0f00;border-color:transparent}
+.pill.on{background:var(--grad);color:#07080b;border-color:transparent}
 label{display:block;font-size:.78rem;font-weight:700;color:var(--ink-2);margin:12px 0 5px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
-/* xp bar */
 .xpwrap{margin-top:10px}
-.xpbar{height:12px;border-radius:999px;background:#0000;border:1px solid var(--line-2);overflow:hidden;background:#000}
+.xpbar{height:12px;border-radius:999px;border:1px solid var(--line-2);overflow:hidden;background:#000}
 .xpbar i{display:block;height:100%;background:var(--grad);border-radius:999px;transition:width .7s cubic-bezier(.2,.8,.2,1)}
-
-/* level number */
 .lvlnum{font-family:Oswald;font-weight:700;font-size:3.6rem;line-height:.9}
 .rankname{font-family:Oswald;letter-spacing:.14em;font-weight:600}
 
-/* today banner */
 .banner{border-radius:18px;padding:18px;background:var(--grad-soft);border:1px solid var(--line-2);position:relative;overflow:hidden}
 .banner .lbl{font-size:.7rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
 .banner .big{font-family:Oswald;font-weight:700;font-size:1.9rem;text-transform:uppercase;line-height:1;margin-top:4px}
-
-/* quote */
 .quote{font-size:1.02rem;font-weight:600;line-height:1.4}
 
-/* task / exercise rows */
 .trow{display:flex;align-items:center;gap:12px;padding:13px 14px;background:var(--card);border:1px solid var(--line);border-radius:14px}
 .trow+.trow{margin-top:8px}
 .trow.done{opacity:.5}
@@ -128,8 +119,28 @@ label{display:block;font-size:.78rem;font-weight:700;color:var(--ink-2);margin:1
 .tn{font-weight:700}
 .tsub{font-size:.76rem;color:var(--muted)}
 
+/* programs */
+.progbanner{background:var(--grad-soft);border:1px solid var(--line-2);border-radius:16px;padding:14px;margin-top:4px}
+.progbanner .pbig{font-family:Oswald;font-weight:700;font-size:1.35rem;text-transform:uppercase;margin-top:2px}
+.prog{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px}
+.prog+.prog{margin-top:12px}
+.progpills{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.ppill{font-size:.72rem;font-weight:700;padding:5px 10px;border-radius:999px;background:var(--card-2);border:1px solid var(--line-2);color:var(--ink-2)}
+.ppill.on{background:var(--grad);color:#1a0f00;border-color:transparent}
+.filterrow{display:flex;gap:8px}
+.demo{width:36px;height:36px;flex:0 0 auto;border-radius:10px;background:var(--card-2);border:1px solid var(--line-2);display:grid;place-items:center;color:var(--gold);font-size:.68rem;text-decoration:none;font-weight:800}
+.demo:active{transform:scale(.94)}
+
+/* badges */
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.badge{background:var(--card-2);border:1px solid var(--line);border-radius:14px;padding:11px 4px;text-align:center;opacity:.42}
+.badge.on{opacity:1;border-color:var(--line-2)}
+.badge .be{font-size:1.55rem;line-height:1}
+.badge .bn{font-size:.56rem;font-weight:800;margin-top:4px;color:var(--ink-2);line-height:1.15;text-transform:uppercase;letter-spacing:.03em}
+.trend{font-size:.78rem;font-weight:800;white-space:nowrap;flex:0 0 auto}
+.trend.up{color:var(--ok)} .trend.dn{color:var(--bad)}
+
 /* food */
-.foodres{max-height:none}
 .fres{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
 .fres .fi{flex:1;min-width:0}
 .fres .fi b{display:block;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -176,7 +187,6 @@ label{display:block;font-size:.78rem;font-weight:700;color:var(--ink-2);margin:1
 .divider{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.72rem;margin:18px 0}
 .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
 
-/* toast */
 #toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%) translateY(-30px);
   z-index:100;background:var(--card-2);border:1px solid var(--line-2);color:var(--ink);font-weight:700;font-size:.85rem;
   padding:12px 20px;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:.35s;max-width:90%;text-align:center}
@@ -193,7 +203,7 @@ label{display:block;font-size:.78rem;font-weight:700;color:var(--ink-2);margin:1
 <div id="auth">
   <svg class="mark" viewBox="0 0 100 100"><defs><linearGradient id="ug" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5f5f3"/><stop offset=".55" stop-color="#f0e6c9"/><stop offset="1" stop-color="#e7c66f"/></linearGradient></defs><path d="M31 25 V52 A19 19 0 0 0 69 52 V25" fill="none" stroke="url(#ug)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></svg>
   <h1>Enter the dark.<br><span>Leave different.</span></h1>
-  <p class="tag">The judgment-free glow-up. Build your routine, track your food, level up — with a crew that hypes you, never rates you.</p>
+  <p class="tag">The judgment-free glow-up. Follow real programs, track your food, level up — with a crew that hypes you, never rates you.</p>
 
   <div class="seg"><button id="segIn" class="on">Sign in</button><button id="segUp">Create account</button></div>
 
@@ -238,6 +248,8 @@ label{display:block;font-size:.78rem;font-weight:700;color:var(--ink-2);margin:1
           <div class="spread" style="margin-top:6px"><span class="tsub" id="homeXpTxt">0 / 100 XP</span><span class="tsub" id="homeToNext"></span></div></div>
         </div>
 
+        <div class="card" id="chalCard"><div id="chalBody"></div></div>
+
         <div class="card"><p class="eyebrow">Daily fuel</p><div class="quote" id="quote">—</div></div>
 
         <div class="card">
@@ -247,17 +259,8 @@ label{display:block;font-size:.78rem;font-weight:700;color:var(--ink-2);margin:1
       </div>
     </section>
 
-    <!-- TRAIN -->
-    <section id="view-train" class="view hidden">
-      <div class="spread"><h2 class="title" style="margin:0">Your routine</h2><button class="btn sm sec" id="editRoutine">Edit</button></div>
-      <p class="muted" style="font-size:.83rem;margin:6px 0 14px">Your split, your rules. Build it once — UMBRA tells you what's on today.</p>
-      <div id="routineDays" class="stack"></div>
-      <div id="routineEmpty" class="hidden">
-        <div class="empty">No routine yet. Make your own or start from a template.</div>
-        <button class="btn" id="buildBtn">Build my routine</button>
-        <button class="btn sec" id="tmplBtn" style="margin-top:10px">Start from a template</button>
-      </div>
-    </section>
+    <!-- TRAIN (filled by renderTrain) -->
+    <section id="view-train" class="view hidden"></section>
 
     <!-- FOOD -->
     <section id="view-food" class="view hidden">
@@ -276,7 +279,7 @@ label{display:block;font-size:.78rem;font-weight:700;color:var(--ink-2);margin:1
       <div class="card" style="margin-top:12px">
         <label style="margin-top:0">Search foods</label>
         <div class="row"><input id="foodQ" placeholder="e.g. chicken breast, banana, oats" enterkeyhint="search"><button class="btn sm" id="foodSearch" style="color:#1a0f00">Go</button></div>
-        <div id="foodResults" class="foodres"></div>
+        <div id="foodResults"></div>
       </div>
 
       <div class="card" style="margin-top:12px">
@@ -309,8 +312,19 @@ label{display:block;font-size:.78rem;font-weight:700;color:var(--ink-2);margin:1
       </div>
 
       <div class="card" style="margin-top:12px">
+        <h3>Badges</h3>
+        <div class="badges" id="badgeGrid" style="margin-top:10px"></div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <h3>Monthly strength test</h3>
+        <p class="muted" style="font-size:.78rem;margin:4px 0 10px">Log your maxes once a month — watch them climb.</p>
+        <div id="strBody"></div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
         <h3>Rank ladder</h3>
-        <p class="muted" style="font-size:.78rem;margin:4px 0 10px">Liftoff-style levels — earn XP by training, eating right, and showing up. <span class="muted">(approximate; tell me exact Liftoff numbers to match 1:1)</span></p>
+        <p class="muted" style="font-size:.78rem;margin:4px 0 10px">Liftoff-style levels — earn XP by training, eating right, and showing up.</p>
         <div id="ladder"></div>
       </div>
 
@@ -368,7 +382,6 @@ const FDC_API_KEY = "DEMO_KEY";
 
 /* ============ helpers ============ */
 const $ = s => document.querySelector(s);
-const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const dkey = (d=new Date()) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
@@ -376,7 +389,8 @@ function toast(msg,big){const t=$("#toast");t.textContent=msg;t.className=big?"s
 
 /* ============ state ============ */
 const DEF = { profile:{username:"Guest",xp:0,level:1,goal:2200,sex:"m",age:null,wt:null,ht:null,act:1.375,obj:0},
-  routine:{}, food:{}, workout:{}, settings:{notif:false,remTime:"17:00"}, meta:{lastCheckin:null,lastNotif:null} };
+  routine:{}, program:null, food:{}, workout:{}, badges:[], strength:{},
+  settings:{notif:false,remTime:"17:00"}, meta:{lastCheckin:null,lastNotif:null,chalClaim:null,strMonth:null} };
 let S = load();
 let user=null, guest=false, curChan="general", chatSub=null;
 
@@ -384,7 +398,7 @@ function load(){ try{ return {...structuredClone(DEF), ...JSON.parse(localStorag
 function save(){ localStorage.setItem("umbra_v2", JSON.stringify(S)); }
 
 /* ============ level system (Liftoff-style) ============ */
-const req = L => 100 + (L-1)*25;                    // xp needed L -> L+1
+const req = L => 100 + (L-1)*25;
 function totalTo(L){ let t=0; for(let i=1;i<L;i++) t+=req(i); return t; }
 function levelInfo(xp){ let L=1; while(L<100 && xp>=totalTo(L+1)) L++; const b=totalTo(L),n=totalTo(L+1),span=Math.max(1,n-b);
   return {level:L, into:xp-b, span, pct:Math.min(100,Math.round((xp-b)/span*100)), toNext:Math.max(0,n-xp)}; }
@@ -398,6 +412,7 @@ async function awardXp(n,reason){
   save(); renderLevel();
   if(info.level>before){ toast(`LEVEL ${info.level} — ${rankName(info.level)}!`,true); }
   else if(reason){ toast(`+${n} XP · ${reason}`); }
+  checkBadges();
   if(cloud && user){ try{ await sb.from("profiles").upsert({id:user.id,username:S.profile.username,xp:S.profile.xp,level:S.profile.level}); }catch{} }
 }
 
@@ -406,17 +421,17 @@ const QUOTES=["You don't have to be extreme, just consistent.","Nobody's watchin
 
 /* ============ TABS ============ */
 function setTab(name){
-  $$("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===name));
-  $$(".view").forEach(v=>v.classList.add("hidden"));
+  document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===name));
+  document.querySelectorAll(".view").forEach(v=>v.classList.add("hidden"));
   $("#view-"+name).classList.remove("hidden");
   $("#main").scrollTop=0;
   if(name==="chat") openChat();
   if(name==="food") renderFood();
-  if(name==="train") renderRoutine();
+  if(name==="train") renderTrain();
   if(name==="you") renderYou();
   if(name==="home") renderHome();
 }
-$$("#tabs button, [data-tab]").forEach(b=> b.addEventListener("click",()=>setTab(b.dataset.tab)));
+document.querySelectorAll("#tabs button, [data-tab]").forEach(b=> b.addEventListener("click",()=>setTab(b.dataset.tab)));
 
 /* ============ HOME ============ */
 function todaysSplit(){ return S.routine[new Date().getDay()] || null; }
@@ -428,9 +443,9 @@ function renderHome(){
   $("#todayWorkout").textContent = sp? sp.name : "Rest Day";
   $("#todayEx").textContent = sp && sp.ex.length ? sp.ex.map(e=>e.n).join(" · ") : (sp?"":"Recover. You earned it.");
   $("#goTrainBtn").style.display = sp? "inline-block":"none";
+  $("#goTrainBtn").onclick=()=>setTab("train");
   $("#quote").textContent = QUOTES[new Date().getDate()%QUOTES.length];
-  renderLevel();
-  // checklist = today's exercises + eat check
+  renderLevel(); renderChallenge();
   const done=S.workout[dk]||{};
   const tasks=[];
   if(sp) sp.ex.forEach((e,i)=>tasks.push({id:"ex"+i,label:e.n,sub:`${e.sets}×${e.reps}`}));
@@ -447,7 +462,6 @@ function renderHome(){
     box.appendChild(row);
   });
   $("#doneCount").textContent=dc;
-  // did they finish the whole workout?
   checkWorkoutDone();
 }
 function toggleTask(id){ const dk=dkey(); const d=S.workout[dk]=S.workout[dk]||{}; d[id]=!d[id]; save(); renderHome(); }
@@ -466,34 +480,134 @@ function renderLevel(){
   $("#homeXp").style.width=i.pct+"%"; $("#homeXpTxt").textContent=`${i.into} / ${i.span} XP`; $("#homeToNext").textContent=`${i.toNext} to LVL ${i.level+1}`;
 }
 function streak(){ let n=0,d=new Date(); for(;;){ const k=dkey(d); const w=S.workout[k]; if(w&&w._awarded){n++;d.setDate(d.getDate()-1);} else if(k===dkey()){d.setDate(d.getDate()-1);} else break; if(n>999)break; } return n; }
+function awardedCount(){ return Object.values(S.workout).filter(w=>w&&w._awarded).length; }
 
-/* ============ TRAIN / routine ============ */
-function renderRoutine(){
-  const wrap=$("#routineDays"); const has=Object.keys(S.routine).length;
-  $("#routineEmpty").classList.toggle("hidden",!!has);
-  wrap.classList.toggle("hidden",!has);
-  if(!has) return;
-  wrap.innerHTML="";
-  for(let d=0; d<7; d++){
-    const sp=S.routine[d]; if(!sp) continue;
-    const c=document.createElement("div"); c.className="card";
-    const today=d===new Date().getDay();
-    c.innerHTML=`<div class="spread"><h3>${DAYS[d]} ${today?'<span class="pill on" style="margin-left:6px">TODAY</span>':''}</h3><span class="tsub">${esc(sp.name)}</span></div>`+
-      `<div style="margin-top:10px">`+ sp.ex.map(e=>`<div class="trow"><div style="flex:1"><div class="tn">${esc(e.n)}</div><div class="tsub">${e.sets} sets × ${e.reps} reps</div></div></div>`).join("") +
-      (sp.ex.length?"":'<div class="tsub">Rest / mobility</div>')+`</div>`;
-    wrap.appendChild(c);
+/* ============ WEEKLY CHALLENGE ============ */
+const CHALLENGES=[
+ {title:"Show up ×3",desc:"Complete 3 workouts this week",metric:"workouts",target:3},
+ {title:"Fuel the machine",desc:"Log your food on 5 days this week",metric:"food",target:5},
+ {title:"Grind ×4",desc:"Complete 4 workouts this week",metric:"workouts",target:4},
+ {title:"Locked in",desc:"Train 3 days + log food 3 days",metric:"mix",target:6}
+];
+function weekDates(){ const d=new Date(); const wd=(d.getDay()+6)%7; d.setDate(d.getDate()-wd); const out=[]; for(let i=0;i<7;i++){ out.push(dkey(new Date(d))); d.setDate(d.getDate()+1);} return out; }
+function weekKey(){ return weekDates()[0]; }
+function curChallenge(){ return CHALLENGES[Math.floor(Date.now()/6048e5)%CHALLENGES.length]; }
+function chalProgress(ch){ const wk=weekDates(); let w=0,f=0; wk.forEach(k=>{ if(S.workout[k]&&S.workout[k]._awarded) w++; if((S.food[k]||[]).length) f++; });
+  if(ch.metric==="workouts") return {have:w,need:ch.target};
+  if(ch.metric==="food") return {have:f,need:ch.target};
+  return {have:Math.min(w,3)+Math.min(f,3),need:ch.target}; }
+function renderChallenge(){ const box=$("#chalBody"); if(!box) return; const ch=curChallenge(); const p=chalProgress(ch); const pct=Math.min(100,Math.round(p.have/p.need*100)); const done=p.have>=p.need;
+  box.innerHTML=`<div class="spread"><div><div class="eyebrow" style="color:var(--gold)">Weekly challenge</div><h3 style="margin-top:3px">${ch.title}</h3></div><span class="tsub">${p.have}/${p.need}${done?" ✓":""}</span></div>
+    <div class="tsub" style="margin:5px 0 9px">${ch.desc}${done?" · +75 XP claimed":""}</div><div class="xpbar"><i style="width:${pct}%"></i></div>`;
+  if(done && S.meta.chalClaim!==weekKey()){ S.meta.chalClaim=weekKey(); save(); awardXp(75,"weekly challenge ✓"); }
+}
+
+/* ============ BADGES ============ */
+const BADGES=[
+ {id:"first",e:"🥇",n:"First Rep",d:"Complete a workout",f:()=>awardedCount()>=1},
+ {id:"wk",e:"🔥",n:"Week Warrior",d:"7-day streak",f:()=>streak()>=7},
+ {id:"mo",e:"🗓️",n:"Unbreakable",d:"30-day streak",f:()=>streak()>=30},
+ {id:"l10",e:"⭐",n:"Rising",d:"Reach level 10",f:()=>S.profile.level>=10},
+ {id:"l25",e:"💫",n:"Relentless",d:"Reach level 25",f:()=>S.profile.level>=25},
+ {id:"fuel",e:"🍗",n:"Fueled",d:"Log your food",f:()=>Object.values(S.food).some(a=>a.length)},
+ {id:"prog",e:"📋",n:"On Program",d:"Start a program",f:()=>!!S.program},
+ {id:"test",e:"📏",n:"Measured",d:"Log a strength test",f:()=>Object.keys(S.strength||{}).length>0},
+ {id:"cent",e:"💯",n:"Centurion",d:"100 push-ups in a test",f:()=>Object.values(S.strength||{}).some(t=>(+t.pushups||0)>=100)},
+ {id:"grind",e:"🏆",n:"Grinder",d:"20 workouts logged",f:()=>awardedCount()>=20}
+];
+function checkBadges(){ S.badges=S.badges||[]; let changed=false;
+  BADGES.forEach(b=>{ if(!S.badges.includes(b.id) && b.f()){ S.badges.push(b.id); changed=true; toast(`${b.e} Badge unlocked: ${b.n}`); } });
+  if(changed){ save(); if(!$("#view-you").classList.contains("hidden")) renderBadges(); }
+}
+function renderBadges(){ const box=$("#badgeGrid"); if(!box) return; S.badges=S.badges||[]; box.innerHTML="";
+  BADGES.forEach(b=>{ const on=S.badges.includes(b.id); const el=document.createElement("div"); el.className="badge"+(on?" on":""); el.title=b.d;
+    el.innerHTML=`<div class="be">${on?b.e:"🔒"}</div><div class="bn">${b.n}</div>`; box.appendChild(el); });
+}
+
+/* ============ PROGRAMS ============ */
+const PROGRAMS=[
+ {id:"bw-found",name:"Bodyweight Foundations",goal:"Build a base",level:"Beginner",style:"bodyweight",days:{
+   1:{name:"Full Body A",ex:[{n:"Push-ups",sets:3,reps:10},{n:"Bodyweight squats",sets:3,reps:15},{n:"Australian rows",sets:3,reps:10},{n:"Plank (sec)",sets:3,reps:30}]},
+   3:{name:"Full Body B",ex:[{n:"Pike push-ups",sets:3,reps:8},{n:"Reverse lunges",sets:3,reps:12},{n:"Superman",sets:3,reps:15},{n:"Hollow hold (sec)",sets:3,reps:20}]},
+   5:{name:"Full Body C",ex:[{n:"Diamond push-ups",sets:3,reps:8},{n:"Glute bridges",sets:3,reps:15},{n:"Chin-ups",sets:3,reps:5},{n:"Side plank (sec)",sets:3,reps:20}]}}},
+ {id:"bw-ppl",name:"Calisthenics Push Pull Legs",goal:"Strength + muscle",level:"Intermediate",style:"bodyweight",days:{
+   1:{name:"Push",ex:[{n:"Push-ups",sets:4,reps:15},{n:"Pike push-ups",sets:3,reps:10},{n:"Dips",sets:3,reps:10},{n:"Diamond push-ups",sets:3,reps:12}]},
+   3:{name:"Pull",ex:[{n:"Pull-ups",sets:4,reps:8},{n:"Chin-ups",sets:3,reps:8},{n:"Australian rows",sets:3,reps:12},{n:"Hanging leg raises",sets:3,reps:10}]},
+   5:{name:"Legs",ex:[{n:"Bodyweight squats",sets:4,reps:20},{n:"Bulgarian split squats",sets:3,reps:12},{n:"Jump squats",sets:3,reps:15},{n:"Calf raises",sets:4,reps:20}]}}},
+ {id:"home-fat",name:"Home Fat-Loss Circuit",goal:"Lose fat",level:"Beginner",style:"bodyweight",days:{
+   1:{name:"Circuit A",ex:[{n:"Jumping jacks",sets:3,reps:40},{n:"Mountain climbers",sets:3,reps:30},{n:"Bodyweight squats",sets:3,reps:20},{n:"Push-ups",sets:3,reps:10}]},
+   2:{name:"Circuit B",ex:[{n:"Burpees",sets:3,reps:10},{n:"High knees",sets:3,reps:40},{n:"Reverse lunges",sets:3,reps:16},{n:"Plank (sec)",sets:3,reps:30}]},
+   4:{name:"Circuit C",ex:[{n:"Squat jumps",sets:3,reps:15},{n:"Push-ups",sets:3,reps:12},{n:"Bicycle crunches",sets:3,reps:30},{n:"Wall sit (sec)",sets:3,reps:40}]}}},
+ {id:"gym-fb",name:"Gym Full Body",goal:"Build muscle",level:"Beginner",style:"gym",days:{
+   1:{name:"Full Body A",ex:[{n:"Barbell squat",sets:3,reps:8},{n:"Bench press",sets:3,reps:8},{n:"Lat pulldown",sets:3,reps:10},{n:"Plank (sec)",sets:3,reps:40}]},
+   3:{name:"Full Body B",ex:[{n:"Deadlift",sets:3,reps:5},{n:"Overhead press",sets:3,reps:8},{n:"Seated row",sets:3,reps:10},{n:"Leg press",sets:3,reps:12}]},
+   5:{name:"Full Body C",ex:[{n:"Front squat",sets:3,reps:8},{n:"Incline dumbbell press",sets:3,reps:10},{n:"Pull-ups",sets:3,reps:8},{n:"Face pulls",sets:3,reps:15}]}}},
+ {id:"gym-ppl",name:"Gym Push Pull Legs",goal:"Strength + muscle",level:"Intermediate",style:"gym",days:{
+   1:{name:"Push",ex:[{n:"Bench press",sets:4,reps:8},{n:"Overhead press",sets:3,reps:10},{n:"Incline dumbbell press",sets:3,reps:10},{n:"Triceps pushdown",sets:3,reps:12}]},
+   2:{name:"Pull",ex:[{n:"Deadlift",sets:3,reps:5},{n:"Pull-ups",sets:4,reps:8},{n:"Barbell row",sets:3,reps:10},{n:"Face pulls",sets:3,reps:15}]},
+   3:{name:"Legs",ex:[{n:"Barbell squat",sets:4,reps:8},{n:"Romanian deadlift",sets:3,reps:10},{n:"Leg press",sets:3,reps:12},{n:"Calf raise",sets:4,reps:15}]},
+   5:{name:"Upper",ex:[{n:"Incline bench press",sets:4,reps:8},{n:"Lat pulldown",sets:3,reps:10},{n:"Lateral raise",sets:3,reps:15},{n:"Dips",sets:3,reps:10}]},
+   6:{name:"Lower",ex:[{n:"Front squat",sets:4,reps:8},{n:"Hip thrust",sets:3,reps:12},{n:"Leg curl",sets:3,reps:12},{n:"Calf raise",sets:4,reps:15}]}}},
+ {id:"gym-ul",name:"Gym Upper / Lower",goal:"Build muscle",level:"Intermediate",style:"gym",days:{
+   1:{name:"Upper A",ex:[{n:"Bench press",sets:4,reps:8},{n:"Barbell row",sets:4,reps:8},{n:"Overhead press",sets:3,reps:10},{n:"Lat pulldown",sets:3,reps:12}]},
+   2:{name:"Lower A",ex:[{n:"Barbell squat",sets:4,reps:8},{n:"Romanian deadlift",sets:3,reps:10},{n:"Leg curl",sets:3,reps:12},{n:"Calf raise",sets:4,reps:15}]},
+   4:{name:"Upper B",ex:[{n:"Incline dumbbell press",sets:4,reps:10},{n:"Pull-ups",sets:4,reps:8},{n:"Lateral raise",sets:3,reps:15},{n:"Face pulls",sets:3,reps:15}]},
+   5:{name:"Lower B",ex:[{n:"Deadlift",sets:3,reps:5},{n:"Front squat",sets:3,reps:8},{n:"Leg press",sets:3,reps:12},{n:"Hanging leg raises",sets:3,reps:12}]}}}
+];
+const ytLink = n => `https://www.youtube.com/results?search_query=${encodeURIComponent(n.replace(/\s*\(sec\)/i,"")+" proper form")}`;
+
+/* ============ TRAIN ============ */
+function renderTrain(){
+  const v=$("#view-train");
+  const hasR=Object.keys(S.routine).length;
+  let html=`<div class="spread"><h2 class="title" style="margin:0">Train</h2>`+(hasR?`<button class="btn sm sec" id="editRoutine">Edit</button>`:``)+`</div>`;
+  if(S.program){ const d=Math.min(90,Math.floor((Date.now()-S.program.start)/864e5)+1); const pct=Math.round(d/90*100);
+    html+=`<div class="progbanner"><div class="spread"><span class="eyebrow" style="color:var(--gold)">Program</span><span class="tsub">Day ${d} / 90</span></div>
+      <div class="pbig">${esc(S.program.name)}</div><div class="xpbar" style="margin-top:9px"><i style="width:${pct}%"></i></div></div>`;
+  }
+  html+=`<button class="btn" id="browsePrograms" style="margin-top:12px">🔥 Browse workout programs</button>`;
+  if(hasR){ html+=`<p class="muted" style="font-size:.8rem;margin:16px 0 8px">Your week — tap ▶ for a demo</p><div id="routineDays" class="stack"></div>`; }
+  else { html+=`<div class="empty">No routine yet. Pick a program above, or build your own.</div><button class="btn sec" id="buildBtn">Build my own</button>`; }
+  v.innerHTML=html;
+  $("#browsePrograms").onclick=programPicker;
+  if($("#editRoutine")) $("#editRoutine").onclick=routineEditor;
+  if($("#buildBtn")) $("#buildBtn").onclick=routineEditor;
+  if(hasR){ const wrap=$("#routineDays");
+    for(let d=0; d<7; d++){ const sp=S.routine[d]; if(!sp) continue;
+      const today=d===new Date().getDay();
+      const c=document.createElement("div"); c.className="card";
+      c.innerHTML=`<div class="spread"><h3>${DAYS[d]} ${today?'<span class="pill on" style="margin-left:6px">TODAY</span>':''}</h3><span class="tsub">${esc(sp.name)}</span></div>`+
+        `<div style="margin-top:10px">`+ sp.ex.map(e=>`<div class="trow"><div style="flex:1"><div class="tn">${esc(e.n)}</div><div class="tsub">${e.sets} × ${e.reps}</div></div><a class="demo" href="${ytLink(e.n)}" target="_blank" rel="noopener">▶</a></div>`).join("") +
+        (sp.ex.length?"":'<div class="tsub">Rest / mobility</div>')+`</div>`;
+      wrap.appendChild(c);
+    }
   }
 }
-$("#editRoutine").onclick=$("#buildBtn").onclick=()=>routineEditor();
-$("#tmplBtn").onclick=()=>{ S.routine=template(); save(); renderRoutine(); toast("Template loaded — now make it yours"); };
-function template(){ return {1:{name:"Push",ex:[{n:"Bench press",sets:4,reps:8},{n:"Overhead press",sets:3,reps:10},{n:"Triceps pushdown",sets:3,reps:12}]},
-  2:{name:"Pull",ex:[{n:"Deadlift",sets:3,reps:5},{n:"Pull-ups",sets:4,reps:8},{n:"Barbell row",sets:3,reps:10}]},
-  3:{name:"Legs",ex:[{n:"Squat",sets:4,reps:8},{n:"Romanian deadlift",sets:3,reps:10},{n:"Calf raise",sets:4,reps:15}]},
-  5:{name:"Upper",ex:[{n:"Incline press",sets:4,reps:10},{n:"Lat pulldown",sets:3,reps:12},{n:"Lateral raise",sets:3,reps:15}]},
-  6:{name:"Lower",ex:[{n:"Front squat",sets:4,reps:8},{n:"Hip thrust",sets:3,reps:12},{n:"Leg curl",sets:3,reps:12}]}}; }
-
+let progFilter="all";
+function programPicker(){
+  const v=$("#view-train");
+  v.innerHTML=`<div class="spread"><h2 class="title" style="margin:0">Programs</h2><button class="btn sm sec" id="backTrain">Back</button></div>
+    <p class="muted" style="font-size:.83rem;margin:6px 0 12px">Pick a plan — it fills your week automatically. Bodyweight plans need zero equipment.</p>
+    <div class="filterrow" id="progFilter"></div><div id="progList" style="margin-top:14px"></div>`;
+  $("#backTrain").onclick=renderTrain;
+  const fl=$("#progFilter"); [["all","All"],["bodyweight","Bodyweight"],["gym","Gym"]].forEach(([k,l])=>{ const b=document.createElement("button"); b.className="ppill"+(progFilter===k?" on":""); b.textContent=l; b.onclick=()=>{progFilter=k;programPicker();}; fl.appendChild(b); });
+  const list=$("#progList");
+  PROGRAMS.filter(p=>progFilter==="all"||p.style===progFilter).forEach(p=>{
+    const days=Object.keys(p.days).length; const active=S.program&&S.program.id===p.id;
+    const c=document.createElement("div"); c.className="prog";
+    c.innerHTML=`<div class="spread"><h4>${esc(p.name)}</h4>${active?'<span class="pill on">ACTIVE</span>':''}</div>
+      <div class="progpills"><span class="ppill">${p.level}</span><span class="ppill">${p.style==="gym"?"🏋️ Gym":"🤸 Bodyweight"}</span><span class="ppill">${days}×/week</span></div>
+      <div class="tsub" style="margin:9px 0 12px">${esc(p.goal)} · ${Object.values(p.days).map(d=>d.name).join(" / ")}</div>
+      <button class="btn sm" style="color:#1a0f00">${active?"Restart":"Start"} program</button>`;
+    c.querySelector("button").onclick=()=>startProgram(p);
+    list.appendChild(c);
+  });
+}
+function startProgram(p){
+  S.routine=JSON.parse(JSON.stringify(p.days)); S.program={id:p.id,name:p.name,start:Date.now()}; save();
+  checkBadges(); renderTrain(); toast(`${p.name} started 🔥`,true);
+}
 function routineEditor(){
-  // build a simple modal-ish editor inside train view
   const v=$("#view-train");
   const draft=JSON.parse(JSON.stringify(S.routine));
   v.innerHTML=`<div class="spread"><h2 class="title" style="margin:0">Build routine</h2><button class="btn sm" id="saveR" style="color:#1a0f00">Save</button></div>
@@ -518,30 +632,18 @@ function routineEditor(){
         r.querySelector(".exn").oninput=ev=>e.n=ev.target.value;
         r.querySelector(".exs").oninput=ev=>e.sets=+ev.target.value||0;
         r.querySelector(".exr").oninput=ev=>e.reps=+ev.target.value||0;
-        r.querySelector(".exdel").onclick=()=>{ sp.ex.splice(i,1); drawKeep(d,sp); };
+        r.querySelector(".exdel").onclick=()=>{ sp.ex.splice(i,1); draw(); };
         el.appendChild(r);
       });
     }
     box.querySelectorAll(".dname").forEach(inp=>inp.oninput=e=>{ const d=e.target.dataset.d; draft[d]=draft[d]||{name:"",ex:[]}; draft[d].name=e.target.value; });
     box.querySelectorAll(".addex").forEach(btn=>btn.onclick=e=>{ const d=e.target.dataset.d; draft[d]=draft[d]||{name:"",ex:[]}; draft[d].ex.push({n:"",sets:3,reps:10}); draw(); });
   }
-  function drawKeep(){ draw(); }
   draw();
   v.querySelector("#saveR").onclick=()=>{
     const out={}; for(let d=0; d<7; d++){ const sp=draft[d]; if(sp && sp.name && sp.name.trim()){ out[d]={name:sp.name.trim(), ex:(sp.ex||[]).filter(x=>x.n&&x.n.trim()).map(x=>({n:x.n.trim(),sets:+x.sets||0,reps:+x.reps||0}))}; } }
-    S.routine=out; save();
-    // rebuild the original train view markup
-    location.hash=""; renderTrainShell(); renderRoutine(); toast("Routine saved 🔥");
+    S.routine=out; S.program=null; save(); renderTrain(); toast("Routine saved 🔥");
   };
-}
-function renderTrainShell(){
-  $("#view-train").innerHTML=`<div class="spread"><h2 class="title" style="margin:0">Your routine</h2><button class="btn sm sec" id="editRoutine">Edit</button></div>
-    <p class="muted" style="font-size:.83rem;margin:6px 0 14px">Your split, your rules. Build it once — UMBRA tells you what's on today.</p>
-    <div id="routineDays" class="stack"></div>
-    <div id="routineEmpty" class="hidden"><div class="empty">No routine yet. Make your own or start from a template.</div>
-    <button class="btn" id="buildBtn">Build my routine</button><button class="btn sec" id="tmplBtn" style="margin-top:10px">Start from a template</button></div>`;
-  $("#editRoutine").onclick=$("#buildBtn").onclick=()=>routineEditor();
-  $("#tmplBtn").onclick=()=>{ S.routine=template(); save(); renderRoutine(); toast("Template loaded — now make it yours"); };
 }
 
 /* ============ FOOD ============ */
@@ -582,9 +684,8 @@ async function searchFood(){
       row.querySelector("button").onclick=()=>{ const g=+gi.value||100; const m=g/100;
         (S.food[dkey()]=S.food[dkey()]||[]).push({name:it.name,g,kcal:it.kcal100*m,p:it.p*m,c:it.c*m,f:it.f*m});
         save(); renderFood(); toast(`Added ${it.name.split(" · ")[0]}`);
-        // reward hitting goal once/day
-        const dk=dkey(); const t=calTotal(); const w=S.workout[dk]=S.workout[dk]||{};
-        if(!w._ate && t.kcal>0){ w._ate=true; save(); awardXp(15,"logged your fuel"); }
+        const dk=dkey(); const w=S.workout[dk]=S.workout[dk]||{};
+        if(!w._ate){ w._ate=true; save(); awardXp(15,"logged your fuel"); } else checkBadges();
       };
       box.appendChild(row);
     });
@@ -595,10 +696,23 @@ $("#foodQ").addEventListener("keydown",e=>{ if(e.key==="Enter") searchFood(); })
 $("#setGoal").onclick=()=>setTab("you");
 
 /* ============ YOU / profile ============ */
+const STR_FIELDS=[["pushups","Max push-ups"],["pullups","Max pull-ups"],["plank","Plank (sec)"],["squat","Squat (lb)"]];
+const monthKey=(off=0)=>{ const d=new Date(); d.setMonth(d.getMonth()+off); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`; };
+function renderStrength(){ const box=$("#strBody"); if(!box) return; S.strength=S.strength||{}; const cur=S.strength[monthKey()]||{}, prev=S.strength[monthKey(-1)]||{};
+  box.innerHTML=STR_FIELDS.map(([k,l])=>{ const pv=prev[k], cv=cur[k];
+    let tr=""; if(pv!=null&&cv!=null) tr = cv>pv?`<span class="trend up">▲ ${cv-pv}</span>`:(cv<pv?`<span class="trend dn">▼ ${pv-cv}</span>`:`<span class="trend muted">–</span>`);
+    else if(pv!=null) tr=`<span class="tsub">last: ${pv}</span>`;
+    return `<label style="margin-top:6px">${l}</label><div class="row"><input type="number" inputmode="numeric" data-k="${k}" value="${cv!=null?cv:""}" placeholder="${pv!=null?pv:"—"}">${tr}</div>`; }).join("")
+    +`<button class="btn sm" id="saveStr" style="margin-top:14px;color:#1a0f00">Save this month's test</button>`;
+  $("#saveStr").onclick=()=>{ const o=S.strength[monthKey()]||{}; box.querySelectorAll("input[data-k]").forEach(i=>{ if(i.value!=="") o[i.dataset.k]=+i.value; }); S.strength[monthKey()]=o; save();
+    if(S.meta.strMonth!==monthKey()){ S.meta.strMonth=monthKey(); save(); awardXp(30,"logged your strength test"); } else checkBadges();
+    renderStrength(); toast("Test saved 💪"); };
+}
 function renderYou(){
   const i=levelInfo(S.profile.xp);
   $("#youLvl").textContent=i.level; $("#youRank").textContent=rankName(i.level); $("#youName").textContent=S.profile.username;
   $("#youXp").style.width=i.pct+"%"; $("#youXpTxt").textContent=`${S.profile.xp} XP total`; $("#youToNext").textContent=`${i.toNext} to LVL ${i.level+1}`;
+  renderBadges(); renderStrength();
   const lad=$("#ladder"); lad.innerHTML="";
   RANKS.slice().reverse().forEach(([lv,nm])=>{ const on=i.level>=lv; const row=document.createElement("div"); row.className="spread"; row.style.padding="8px 0"; row.style.borderTop="1px solid var(--line)";
     row.innerHTML=`<span class="rankname" style="${on?'':'opacity:.4'}">${nm}</span><span class="tsub">LVL ${lv}+ ${on?'· unlocked':''}</span>`; lad.appendChild(row); });
@@ -636,7 +750,7 @@ function scheduleReminder(){
   const now=new Date(), t=new Date(); t.setHours(h,m,0,0); if(t<=now) t.setDate(t.getDate()+1);
   remTimer=setTimeout(()=>{ const sp=todaysSplit(); showNotif("UMBRA", sp?`Today is ${sp.name} day — don't skip 💪`:"Rest day — recover well. See you tomorrow."); scheduleReminder(); }, t-now);
 }
-function maybeNudge(){ // nudge on open once/day if a workout is pending
+function maybeNudge(){
   if(!S.settings.notif) return; const dk=dkey(); if(S.meta.lastNotif===dk) return;
   const sp=todaysSplit(); const w=S.workout[dk]||{};
   if(sp && !w._awarded){ S.meta.lastNotif=dk; save(); showNotif("UMBRA",`Today is ${sp.name} day — let's get it 🔥`); }
@@ -718,6 +832,7 @@ function enterApp(){
   $("#auth").classList.add("hidden"); $("#app").classList.remove("hidden");
   const dk=dkey();
   if(S.meta.lastCheckin!==dk){ S.meta.lastCheckin=dk; save(); awardXp(10,"showed up today"); }
+  checkBadges();
   setTab("home");
   if(S.settings.notif){ scheduleReminder(); maybeNudge(); }
 }
@@ -731,10 +846,8 @@ async function boot(){
   if(cloud){
     const {data:{session}}=await sb.auth.getSession();
     if(session){ user=session.user; await loadProfile(); enterApp(); }
-    sb.auth.onAuthStateChange(async(_e,sess)=>{ if(sess&&!$("#app").classList.contains("hidden")===false){ /*noop*/ }
-      if(sess){ user=sess.user; guest=false; await loadProfile(); enterApp(); } });
+    sb.auth.onAuthStateChange(async(_e,sess)=>{ if(sess){ user=sess.user; guest=false; await loadProfile(); enterApp(); } });
   }
-  // service worker
   if("serviceWorker" in navigator){ try{ await navigator.serviceWorker.register("sw.js"); }catch{} }
 }
 boot();
